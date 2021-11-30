@@ -56,6 +56,8 @@ namespace PresentationLayer {
             this.button_RegisterChoose = new System.Windows.Forms.Button();
             this.button_LogInChoose = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.label_EmailExist = new System.Windows.Forms.Label();
+            this.label_EmailExistLogin = new System.Windows.Forms.Label();
             this.panel_Registration.SuspendLayout();
             this.panel_LogIn.SuspendLayout();
             this.SuspendLayout();
@@ -170,6 +172,8 @@ namespace PresentationLayer {
             // 
             // panel_Registration
             // 
+            this.panel_Registration.Controls.Add(this.label_EmailExistLogin);
+            this.panel_Registration.Controls.Add(this.label_EmailExist);
             this.panel_Registration.Controls.Add(this.panel_4);
             this.panel_Registration.Controls.Add(this.panel_3);
             this.panel_Registration.Controls.Add(this.panel_2);
@@ -186,7 +190,7 @@ namespace PresentationLayer {
             this.panel_Registration.Controls.Add(this.checkBox_Number);
             this.panel_Registration.Controls.Add(this.button_SignUp);
             this.panel_Registration.Controls.Add(this.checkBox_Uppercase);
-            this.panel_Registration.Location = new System.Drawing.Point(306, 108);
+            this.panel_Registration.Location = new System.Drawing.Point(630, 108);
             this.panel_Registration.Margin = new System.Windows.Forms.Padding(0);
             this.panel_Registration.Name = "panel_Registration";
             this.panel_Registration.Size = new System.Drawing.Size(313, 379);
@@ -285,7 +289,7 @@ namespace PresentationLayer {
             this.panel_LogIn.Controls.Add(this.textBox_EmailLogin);
             this.panel_LogIn.Controls.Add(this.textBox_PasswordLogin);
             this.panel_LogIn.Controls.Add(this.button_LogIn);
-            this.panel_LogIn.Location = new System.Drawing.Point(646, 117);
+            this.panel_LogIn.Location = new System.Drawing.Point(306, 108);
             this.panel_LogIn.Margin = new System.Windows.Forms.Padding(0);
             this.panel_LogIn.Name = "panel_LogIn";
             this.panel_LogIn.Size = new System.Drawing.Size(313, 379);
@@ -352,6 +356,7 @@ namespace PresentationLayer {
             this.button_LogIn.TabIndex = 19;
             this.button_LogIn.Text = "LOG IN";
             this.button_LogIn.UseVisualStyleBackColor = true;
+            this.button_LogIn.Click += new System.EventHandler(this.button_LogIn_Click);
             this.button_LogIn.MouseEnter += new System.EventHandler(this.button_LogIn_Enter);
             this.button_LogIn.MouseLeave += new System.EventHandler(this.button_LogIn_Leave);
             // 
@@ -396,18 +401,41 @@ namespace PresentationLayer {
             this.imageList1.ImageSize = new System.Drawing.Size(16, 16);
             this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // label_EmailExist
+            // 
+            this.label_EmailExist.AutoSize = true;
+            this.label_EmailExist.ForeColor = System.Drawing.Color.Red;
+            this.label_EmailExist.Location = new System.Drawing.Point(50, 317);
+            this.label_EmailExist.Name = "label_EmailExist";
+            this.label_EmailExist.Size = new System.Drawing.Size(218, 13);
+            this.label_EmailExist.TabIndex = 31;
+            this.label_EmailExist.Text = "This email address already exists in database";
+            this.label_EmailExist.Visible = false;
+            // 
+            // label_EmailExistLogin
+            // 
+            this.label_EmailExistLogin.AutoSize = true;
+            this.label_EmailExistLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label_EmailExistLogin.ForeColor = System.Drawing.Color.Black;
+            this.label_EmailExistLogin.Location = new System.Drawing.Point(126, 330);
+            this.label_EmailExistLogin.Name = "label_EmailExistLogin";
+            this.label_EmailExistLogin.Size = new System.Drawing.Size(72, 24);
+            this.label_EmailExistLogin.TabIndex = 32;
+            this.label_EmailExistLogin.Text = "Log in?";
+            this.label_EmailExistLogin.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(991, 496);
+            this.ClientSize = new System.Drawing.Size(949, 496);
             this.Controls.Add(this.panel_Registration);
             this.Controls.Add(this.button_RegisterChoose);
             this.Controls.Add(this.button_LogInChoose);
             this.Controls.Add(this.panel_LogIn);
             this.Controls.Add(this.panel1);
             this.ForeColor = System.Drawing.Color.Black;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
@@ -449,6 +477,8 @@ namespace PresentationLayer {
         private System.Windows.Forms.Panel panel_4;
         private System.Windows.Forms.Panel panel_3;
         private System.Windows.Forms.Panel panel_2;
+        private System.Windows.Forms.Label label_EmailExistLogin;
+        private System.Windows.Forms.Label label_EmailExist;
     }
 }
 

@@ -1,4 +1,5 @@
 ﻿using Shared.Interfaces;
+using Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -244,7 +245,6 @@ namespace PresentationLayer
                 checkBox_SpecialChar.Checked = false;
             else
                 checkBox_SpecialChar.Checked = true;
-
             if (!checks[3])
                 checkBox_Uppercase.Checked = false;
             else
@@ -260,6 +260,24 @@ namespace PresentationLayer
                 label_ConfirmPassword.Visible = true;
             if (textBox_Password.Text == "Password")
                 label_Password.Visible = true;
+            if (IsEmailAddressExist(textBox_Email.Text))
+            {
+                label_EmailExist.Visible = true;
+                label_EmailExistLogin.Visible = true;
+            }
+            else
+            {
+                label_EmailExist.Visible = false;
+                label_EmailExistLogin.Visible = false;
+
+                string email = textBox_Email.Text;
+                string password = textBox_Password.Text;
+
+                iUserBusiness.InsertUser(email, password);
+
+                string message = "Succesfull registration";
+                MessageBox.Show(message);
+            }
         }
         private void button_GeneratePassword_Click(object sender, EventArgs e)
         {
@@ -282,5 +300,15 @@ namespace PresentationLayer
         {
             return iUserBusiness.CreateRandomPassword(length);
         }
+        public Boolean IsEmailAddressExist(string emailAddress)
+        {
+            return iUserBusiness.IsEmailAddressExist(emailAddress);
+        }
+
+        private void button_LogIn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
+    
 }
