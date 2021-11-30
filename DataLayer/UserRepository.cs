@@ -24,7 +24,7 @@ namespace DataLayer
                     SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
                     while(sqlDataReader.Read())
                     {
-                        EmailAddresses.Add(sqlDataReader.GetString(1));
+                        EmailAddresses.Add(sqlDataReader.GetString(0));
                     }
                 }    
             }
@@ -55,6 +55,26 @@ namespace DataLayer
                 }
 
             }
+        }
+        public Dictionary<string, string> GetAuthKeyAndSalt(string emailAddress)
+        {
+            Dictionary<string, string> dict = new Dictionary<string, string>();
+            using (SqlConnection sqlConnection = new SqlConnection(Helper.GetConnectionString("PasswordManagerDB")))
+            {
+                sqlConnection.Open();
+                using (SqlCommand sqlCommand = new SqlCommand())
+                {
+                    sqlCommand.Connection = sqlConnection;
+                    sqlCommand.CommandText = "SELECT AuthKey, Salt FROM USERS WHERE EmailAddress = @emailAddres";
+                    sqlCommand.Parameters.AddWithValue("@emailAddres", emailAddress);
+                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
+
+                    dict.Add("AuthKey", sqlDataReader.GetString(0));
+                    dict.Add("Salt", sqlDataReader.GetString(1));
+                }
+
+            }
+            return dict;
         }
 
     }

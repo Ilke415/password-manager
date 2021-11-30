@@ -12,5 +12,7 @@ namespace Shared.Interfaces
     {
         List<string> GetAllEmailAddresses();
         void InsertUser(User user);
+
+        Dictionary<string, string> GetAuthKeyAndSalt(string emailAddress);
     }
 }
