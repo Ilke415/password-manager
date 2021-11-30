@@ -158,6 +158,7 @@ namespace BusinessLayer {
 
             return Convert.ToBase64String(AuthKeyHash);
         }
+
         // END OF CRYPTOGRAPHY METHODS
 
 
@@ -176,21 +177,13 @@ namespace BusinessLayer {
 
             string AuthKey = CreateAuthKey(password, emailAddress, saltBytes);
 
-
             // Create User object
+            User newUser = new User(emailAddress, AuthKey, saltString);
 
-           
+            // Call method from DataLayer through IUserRepository interface to insert User in database
+            userRepository.InsertUser(newUser);
 
-            // Call method from 
-
-
-
-        }
-
-
-
-
-
+        } // End of method InsertUser()
 
         // END OF METHODS FOR WORKING WITH DATABASE
     }
