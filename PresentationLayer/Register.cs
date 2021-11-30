@@ -47,7 +47,7 @@ namespace PresentationLayer
             if (textBox_Password.Text == "Password")
                 textBox_Password.Text = "";
             textBox_Password.ForeColor = Color.Black;
-            textBox_Password.PasswordChar = '*';
+            textBox_Password.PasswordChar = '●';
         }
         private void textBox_Password_Leave(object sender, EventArgs e)
         {
@@ -63,7 +63,7 @@ namespace PresentationLayer
             if (textBox_ConfirmPassword.Text == "Confirm Password")
                 textBox_ConfirmPassword.Text = "";
             textBox_ConfirmPassword.ForeColor = Color.Black;
-            textBox_ConfirmPassword.PasswordChar = '*';
+            textBox_ConfirmPassword.PasswordChar = '●';
         }
         private void textBox_ConfirmPassword_Leave(object sender, EventArgs e)
         {
@@ -273,7 +273,7 @@ namespace PresentationLayer
                 string email = textBox_Email.Text;
                 string password = textBox_Password.Text;
 
-                iUserBusiness.InsertUser(email, password);
+                iUserBusiness.InsertUser(password, email);
 
                 string message = "Succesfull registration";
                 MessageBox.Show(message);
@@ -281,8 +281,7 @@ namespace PresentationLayer
         }
         private void button_GeneratePassword_Click(object sender, EventArgs e)
         {
-            textBox_Password.PasswordChar = '*';
-            textBox_ConfirmPassword.PasswordChar = '*';
+            
             String generatedPassword = CreateRandomPassword(14);
             textBox_Password.Text = generatedPassword;
             textBox_ConfirmPassword.Text = generatedPassword;
