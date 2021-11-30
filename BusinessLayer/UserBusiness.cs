@@ -7,7 +7,7 @@ using Shared.Interfaces;
 using Shared.Models;
 using System.Text.RegularExpressions;
 using System.Net.Mail;
-
+using System.Security.Cryptography;
 
 namespace BusinessLayer {
 
@@ -18,6 +18,9 @@ namespace BusinessLayer {
         {
             this.userRepository = _userRepository;
         }
+
+
+        // METHODS FOR VALIDATION
 
 
         // Method for validating email from user input
@@ -64,6 +67,25 @@ namespace BusinessLayer {
         // End of  IsValidPassword() method
 
 
+        // Method for checking if email address already exist if user try to register with same email address
+
+        public bool IsEmailAddressExist(string emailAddress)
+        {
+            List<String> emailAddresses = userRepository.GetAllEmailAddresses();
+
+            if (emailAddresses.Contains(emailAddress))
+                return true;
+
+            return false;
+        }
+        // End of method  IsEmailAddressExist(string emailAddress)
+
+
+
+        // END OF VALIDATION METHODS
+
+
+
         // Method for creating random password
         public string CreateRandomPassword(int length)
         {// Characters allowed in password
@@ -99,16 +121,77 @@ namespace BusinessLayer {
         // End of method CreateRandomPassword(int length)
 
 
-        // Method for checking if email address already exist if user try to register with same email address
+        // CRYPTOGRAPHY METHODS
 
-        public bool IsEmailAddressExist(string emailAddress)
+        // Generate 24bytes long PBKDF2 hash 
+        public byte[] CreatePBKDF2Hash(string input, byte[] salt)
         {
-            List<String> emailAddresses = userRepository.GetAllEmailAddresses();
-
-            if (emailAddresses.Contains(emailAddress))
-                return true;
-
-            return false;
+            // Generate the hash
+            Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(input, salt, iterations: 10000); // hard coded 10000 iterations
+            return pbkdf2.GetBytes(24); //24 bytes length is 192 bits
         }
+
+
+        // Generate a 128-bit salt using a random sequence of nonzero values
+        public byte[] CreateHashSalt()
+        {
+            byte[] salt = new byte[128 / 8];
+
+            using (var rngCsp = new RNGCryptoServiceProvider())
+            {
+                rngCsp.GetNonZeroBytes(salt);
+            }
+
+            return salt;
+        }
+
+
+        // Generate AuthKey for authentication using PBKDF2 hash function
+
+        // Formula: AuthKey = H(H(password,email)+password)
+        // H (hash function) = PBKDF2
+        public string CreateAuthKey(string password, string email, byte[] salt)
+        {
+            // This must reworked because you didn't append masterPassword again in function
+            byte[] AuthKeyHash = CreatePBKDF2Hash(Convert.ToBase64String(CreatePBKDF2Hash(password + email, salt)) + password, salt);
+
+
+            return Convert.ToBase64String(AuthKeyHash);
+        }
+        // END OF CRYPTOGRAPHY METHODS
+
+
+        // METHODS FOR WORKING WITH DATABASE
+
+
+        // Method for inserting new User in database
+        public void InsertUser(string password, string emailAddress)
+        {
+
+
+            // Create AuthKey and salt 
+            byte[] saltBytes = CreateHashSalt();
+
+            string saltString = Convert.ToBase64String(saltBytes);
+
+            string AuthKey = CreateAuthKey(password, emailAddress, saltBytes);
+
+
+            // Create User object
+
+           
+
+            // Call method from 
+
+
+
+        }
+
+
+
+
+
+
+        // END OF METHODS FOR WORKING WITH DATABASE
     }
 }
