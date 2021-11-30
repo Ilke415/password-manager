@@ -40,7 +40,7 @@ namespace DataLayer
                 {
                     sqlCommand.Connection = sqlConnection;
                     sqlCommand.CommandText = "INSERT INTO USERS VALUES (@EmailAddress,@AuthKey,@Salt)";
-                    sqlCommand.Parameters.AddWithValue("@EmailAddres", user.EmailAddress);
+                    sqlCommand.Parameters.AddWithValue("@EmailAddress", user.EmailAddress);
                     sqlCommand.Parameters.AddWithValue("@AuthKey", user.AuthKey);
                     sqlCommand.Parameters.AddWithValue("@Salt", user.Salt);
                     try
