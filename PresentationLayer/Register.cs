@@ -270,7 +270,7 @@ namespace PresentationLayer
                 label_EmailExist.Visible = false;
                 label_EmailExistLogin.Visible = false;
 
-                string email = textBox_Email.Text;
+                string email = textBox_Email.Text.Trim();
                 string password = textBox_Password.Text;
 
                 iUserBusiness.InsertUser(password, email);
