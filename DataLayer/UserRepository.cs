@@ -53,7 +53,6 @@ namespace DataLayer
                         throw;
                     }
                 }
-
             }
         }
         public Dictionary<string, string> GetAuthKeyAndSalt(string emailAddress)

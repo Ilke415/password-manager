@@ -98,6 +98,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\Debug\PresentationLayer.csproj.AssemblyReference.cache" />
@@ -145,6 +146,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="obj\Debug\PresentationLayer.csproj.FileListAbsolute.txt" />
+    <None Include="Resources\blank.PNG" />
+    <None Include="Resources\warning.PNG" />
+    <None Include="Resources\success.PNG" />
+    <None Include="Resources\hide.png" />
+    <None Include="Resources\show.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />

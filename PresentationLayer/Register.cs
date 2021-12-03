@@ -148,17 +148,9 @@ namespace PresentationLayer
             button_LogIn.ForeColor = Color.Black;
         }
 
-        private void button_GeneratePassword_Enter(object sender, EventArgs e)
-        {
-            button_GeneratePassword.BackColor = Color.FromArgb(35, 85, 148);
-            button_GeneratePassword.ForeColor = Color.White;
-        }
+       
 
-        private void button_GeneratePassword_Leave(object sender, EventArgs e)
-        {
-            button_GeneratePassword.BackColor = Color.White;
-            button_GeneratePassword.ForeColor = Color.Black;
-        }
+        
 
         private void panel3_Paint(object sender, PaintEventArgs e)
         {
@@ -172,7 +164,9 @@ namespace PresentationLayer
             button_RegisterChoose.BackColor = Color.White;
             button_RegisterChoose.ForeColor = Color.Black;
             panel_Registration.Visible = false;
+            
             panel_LogIn.Visible = true;
+            panel_LogIn.BringToFront();
         }
 
         private void button_RegisterChoose_Click(object sender, EventArgs e)
@@ -183,12 +177,16 @@ namespace PresentationLayer
             button_LogInChoose.ForeColor = Color.Black;
             panel_LogIn.Visible = false;
             panel_Registration.Visible = true;
+            panel_Registration.BringToFront();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             this.ActiveControl = label_Email;
-
+            panel_Registration.Visible = false;
+            panel_LogIn.Visible = true;
+          
+            button_LogInChoose.PerformClick();
         }
 
         private void textBox_Password_TextChanged(object sender, EventArgs e)
@@ -232,23 +230,7 @@ namespace PresentationLayer
 
 
 
-            if (!checks[0])
-                checkBox_MinimalChar.Checked = false;
-            else
-                checkBox_MinimalChar.Checked = true;
-            if (!checks[1])
-                checkBox_Number.Checked = false;
-            else
-                checkBox_Number.Checked = true;
-
-            if (!checks[2])
-                checkBox_SpecialChar.Checked = false;
-            else
-                checkBox_SpecialChar.Checked = true;
-            if (!checks[3])
-                checkBox_Uppercase.Checked = false;
-            else
-                checkBox_Uppercase.Checked = true;
+           
         }
 
         private void button_SignUp_Click(object sender, EventArgs e)
@@ -279,14 +261,7 @@ namespace PresentationLayer
                 MessageBox.Show(message);
             }
         }
-        private void button_GeneratePassword_Click(object sender, EventArgs e)
-        {
-            
-            String generatedPassword = CreateRandomPassword(14);
-            textBox_Password.Text = generatedPassword;
-            textBox_ConfirmPassword.Text = generatedPassword;
-
-        }
+        
         public Boolean IsValidEmailAddress(string emailAddress)
         {
             return iUserBusiness.IsValidEmailAddress(emailAddress);
@@ -308,6 +283,108 @@ namespace PresentationLayer
         {
 
         }
+
+        private void checkBox_Uppercase_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox_MinimalChar_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox_SpecialChar_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void checkBox_Number_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox_ConfirmPassword_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonShowHideConfirmPassword_Click(object sender, EventArgs e)
+        {
+            TogglePasswordTextVisibility(new List<Button> { buttonShowHidePassword, buttonShowHideConfirmPassword }, new List<TextBox> { textBox_Password, textBox_ConfirmPassword });
+        }
+        private void buttonShowHidePassword_Click(object sender, EventArgs e)
+        {
+            TogglePasswordTextVisibility(new List<Button> { buttonShowHidePassword, buttonShowHideConfirmPassword }, new List<TextBox> { textBox_Password, textBox_ConfirmPassword });
+        }
+        private void label_EmailExistLogin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label_EmailExist_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label_ConfirmPassword_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        
+        private void TogglePasswordTextVisibility(List<Button> buttons, List<TextBox> textBoxes)
+        {
+            foreach (var button in buttons)
+            {
+                if (textBoxes[0].UseSystemPasswordChar)
+
+                    button.BackgroundImage = global::PresentationLayer.Properties.Resources.show;
+
+                else
+                    button.BackgroundImage = global::PresentationLayer.Properties.Resources.hide;
+
+            }
+
+
+            foreach (var textBox in textBoxes)
+            {
+                textBox.UseSystemPasswordChar = !textBox.UseSystemPasswordChar;
+            }
+        }
+        private void ChangeRequirementsIcons(List<Button> buttons, List<bool> requirements)
+        {
+
+            // buttons[0] => buttonLength
+            // buttons[1] => buttonNumbers
+            // buttons[2] => buttonUppercase
+            // buttons[3] => buttonLowercase
+
+            for (int i = 0; i < requirements.Count - 1; i++)
+            {
+                if (requirements[i])
+                    buttons[i].BackgroundImage = global::PresentationLayer.Properties.Resources.success;
+                else
+                    buttons[i].BackgroundImage = global::PresentationLayer.Properties.Resources.warning;
+            }
+        }
+
+        private void ResetRequirementsIcons(List<Button> buttons)
+        {
+            foreach (var item in buttons)
+            {
+                item.BackgroundImage = global::PresentationLayer.Properties.Resources.blank;
+            }
+
+        }
+
+
+       
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
     }
-    
+
 }
