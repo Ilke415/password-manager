@@ -106,8 +106,97 @@ namespace BusinessLayer {
         //  =================================== END OF VALIDATION METHODS  ===================================
 
 
+        //  =================================== PASSWORD METHODS  ===================================
 
-        
+        private int CalculatePasswordPoolSize(string password)
+        {
+            password.Trim();
+
+            int passwordPoolSize = 0;
+
+            List<int> poolSizes = new List<int>() { 10, 26, 26, 32 };
+
+            List<bool> isPasswordContains = ValidationOfPasswordRequirements(password);
+
+            for (int i = 0, j = 1; i < poolSizes.Count && j < 5; i++, j++)
+            {
+                if (isPasswordContains[j])
+                {
+                    passwordPoolSize += poolSizes[i];
+                }
+            }
+
+
+            return passwordPoolSize;
+
+        }
+
+
+        private int CalculatePasswordEntropy(string password)
+        {
+
+            password.Trim();
+
+            // Calcuate password entropy
+            // Formula E = L * log2(R)
+            // E = Entropy
+            // L = password length
+            // R = size of the pool
+
+            int R = 0;
+
+            int L = password.Length;
+
+            // List[0] => number of digits
+            // List[1] => number of lowercase latin letters
+            // List[2] => number of uppercase latin letters
+            // List[3] => number of special chars
+
+            // Calculate R
+
+            R = CalculatePasswordPoolSize(password);
+
+            // To get log with base two u can do log(10)X / log(10)2
+
+            // Calculate log(2) from R
+            double E = Math.Log10(R) / Math.Log10(2);
+
+            int positionOfDecimalDot = E.ToString().IndexOf('.');
+
+            // Calculate password Entropy
+            int integerValueOfE = Convert.ToInt32(E.ToString().Substring(0, positionOfDecimalDot)) * L;
+
+
+            return integerValueOfE;
+
+        }
+
+        public int CalculatePasswordLengthScore(string password)
+        {
+
+            int Score = 0;
+
+            password.Trim();
+
+            int passwordLength = password.Length;
+
+            if (passwordLength > 12) Score = 10;
+            if (passwordLength >= 10 && passwordLength < 12) Score = 8;
+            if (passwordLength >= 8 && passwordLength < 10) Score = 6;
+            if (passwordLength >= 6 && passwordLength < 8) Score = 4;
+            if (passwordLength < 6) Score = 0;
+
+            return Score;
+        }
+
+
+
+
+
+
+
+
+
 
         // Method for creating random password
         public string CreateRandomPassword(int length)
@@ -142,6 +231,9 @@ namespace BusinessLayer {
             return new string(chars);
         }
         // End of method CreateRandomPassword(int length)
+
+
+        //  =================================== END OF PASSWORD METHODS  ===================================
 
 
         // =================================== CRYPTOGRAPHY METHODS =================================== 
