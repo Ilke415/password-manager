@@ -20,7 +20,7 @@ namespace BusinessLayer {
         }
 
 
-        // METHODS FOR VALIDATION
+        //  =================================== METHODS FOR VALIDATION  ===================================
 
 
         // Method for validating email from user input
@@ -40,29 +40,50 @@ namespace BusinessLayer {
 
         } // End of  IsValidEmailAddress method
 
-        // Method for checking if user password fulfills minimum requirements
-        public List<bool> IsValidPassword(string password)
+
+        // Method for checking if password contains special characters
+        private bool IsContainingSpecialCharacters(string input)
         {
+
+            char[] specialCharacters = new char[] {
+           '`', '~', '!', '@', '#', '$', '%', '^',
+            '&', '*', '(', ')', '-', '=', '+', '[',
+            ']', '{', '}', '\\', '|', ';', '"', '\'',
+            ',', '.', ':', '<', '>', '/', '?', '_'
+            };
+
+
+            return input.IndexOfAny(specialCharacters) != -1;
+
+        }
+
+        // Method for checking if user password fulfills minimum requirements
+        public List<bool> ValidationOfPasswordRequirements(string password)
+        {
+
+            List<bool> requirements = new List<bool>() { false, false, false, false, false };
+
 
             // List[0] => true if password is 12 or more characters long
             // List[1] => true if password have at least one number
-            // List[2] => true if password have at least one special character
-            // List[3] => true if password have at least one upper case letter
-
-            List<bool> passwordValidationValues = new List<bool>() { false, false, false, false };
-
+            // List[2] => true if password have at least one lowercase letter
+            // List[3] => true if password have at least one uppercase letter
+            // List[4] => true if password contains at least one special character
 
             if (password.Length >= 12)
-                passwordValidationValues[0] = true;
+                requirements[0] = true;
             if (Regex.Match(password, "[0-9]{1}").Success)
-                passwordValidationValues[1] = true;
-            if (Regex.Match(password, "[^A-Za-z0-9]").Success)
-                passwordValidationValues[2] = true;
+                requirements[1] = true;
+            if (Regex.Match(password, "[a-z]{1}").Success)
+                requirements[2] = true;
             if (Regex.Match(password, "[A-Z]{1}").Success)
-                passwordValidationValues[3] = true;
+                requirements[3] = true;
+            if (IsContainingSpecialCharacters(password))
+                requirements[4] = true;
 
 
-            return passwordValidationValues;
+
+            return requirements;
         }
         // End of  IsValidPassword() method
 
@@ -82,9 +103,11 @@ namespace BusinessLayer {
 
 
 
-        // END OF VALIDATION METHODS
+        //  =================================== END OF VALIDATION METHODS  ===================================
 
 
+
+        
 
         // Method for creating random password
         public string CreateRandomPassword(int length)
@@ -121,7 +144,7 @@ namespace BusinessLayer {
         // End of method CreateRandomPassword(int length)
 
 
-        // CRYPTOGRAPHY METHODS
+        // =================================== CRYPTOGRAPHY METHODS =================================== 
 
         // Generate 24bytes long PBKDF2 hash 
         public byte[] CreatePBKDF2Hash(string input, byte[] salt)
@@ -159,10 +182,10 @@ namespace BusinessLayer {
             return Convert.ToBase64String(AuthKeyHash);
         }
 
-        // END OF CRYPTOGRAPHY METHODS
+        // =================================== END OF CRYPTOGRAPHY METHODS  ===================================
 
 
-        // METHODS FOR WORKING WITH DATABASE
+        //  =================================== METHODS FOR WORKING WITH DATABASE  ===================================
 
 
         // Method for inserting new User in database
@@ -185,6 +208,6 @@ namespace BusinessLayer {
 
         } // End of method InsertUser()
 
-        // END OF METHODS FOR WORKING WITH DATABASE
+        //  =================================== END OF METHODS FOR WORKING WITH DATABASE  ===================================
     }
 }

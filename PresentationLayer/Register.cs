@@ -268,7 +268,7 @@ namespace PresentationLayer
         }
         public List<Boolean> IsValidPassword(string password)
         {
-            return iUserBusiness.IsValidPassword(password);
+            return iUserBusiness.ValidationOfPasswordRequirements(password);
         }
         public string CreateRandomPassword(int length)
         {
