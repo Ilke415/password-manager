@@ -108,7 +108,7 @@ namespace BusinessLayer {
 
         //  =================================== PASSWORD METHODS  ===================================
 
-        private int CalculatePasswordPoolSize(string password)
+        public int CalculatePasswordPoolSize(string password)
         {
             password.Trim();
 
@@ -132,7 +132,7 @@ namespace BusinessLayer {
         }
 
 
-        private int CalculatePasswordEntropy(string password)
+        public int CalculatePasswordEntropy(string password)
         {
 
             password.Trim();
@@ -191,7 +191,62 @@ namespace BusinessLayer {
 
 
 
+        public int CalculatePasswordPoolSizeScore(string password)
+        {
+            int Score = 0;
+            int poolSize = CalculatePasswordPoolSize(password);
 
+            switch (poolSize)
+            {
+                case 26:
+                    return Score = 2;
+                case 36:
+                    return Score = 4;
+                case 52:
+                    return Score = 6;
+                case 62:
+                    return Score = 8;
+                case 94:
+                    return Score = 10;
+                default:
+                    return Score;
+            }
+
+            return Score;
+        }
+
+        public int CalculatePasswordEntropyScore(string password) {
+
+            int Score = 0;
+
+            password.Trim();
+
+            int entropy = CalculatePasswordEntropy(password);
+
+
+            if (entropy <= 28) Score = 2;
+            if (entropy > 28 && entropy <= 47) Score = 4;
+            if (entropy > 47 && entropy <= 66) Score = 6;
+            if (entropy > 66 && entropy <= 85) Score = 8;
+            if (entropy > 85) Score = 10;
+
+            return Score;
+
+        }
+
+
+
+        //public Dictionary<string, string> PasswordDeriveBytesStrength(string password)
+        //{
+
+        //    password.Trim();
+        //    int lengthScore = CalculatePasswordLengthScore(password);
+        //    int poolSizeScore = CalculatePasswordPoolSizeScore(password);
+        //    int entropyScore = CalculatePasswordEntropyScore(password);
+
+
+
+        //}
 
 
 
