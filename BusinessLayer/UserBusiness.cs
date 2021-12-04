@@ -287,6 +287,35 @@ namespace BusinessLayer {
         }
         // End of method CreateRandomPassword(int length)
 
+        public Dictionary<string, string> CalculatePasswordStrength(string password)
+        {
+
+            password.Trim();
+
+            Dictionary<string, string> resultScore = new Dictionary<string, string>();
+
+            int lengthScore = CalculatePasswordLengthScore(password);
+            int poolSizeScore = CalculatePasswordPoolSizeScore(password);
+            int entropyScore = CalculatePasswordEntropyScore(password);
+
+
+            int averageScore = (lengthScore + poolSizeScore + entropyScore) / 3;
+
+            if (averageScore <= 4)
+                resultScore.Add("Strength", "Weak");
+
+            else if (averageScore >= 4 && averageScore <= 8)
+                resultScore.Add("Strength", "Fair");
+
+            else if (averageScore > 8)
+                resultScore.Add("Strength", "Strong");
+
+
+
+            return resultScore;
+
+        }
+
 
         //  =================================== END OF PASSWORD METHODS  ===================================
 
