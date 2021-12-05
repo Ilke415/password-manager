@@ -15,9 +15,10 @@ namespace PresentationLayer
     public partial class Form1 : Form
     {
         private readonly IUserBusiness iUserBusiness;
-
+        
         public Form1(IUserBusiness iUserBusiness)
         {
+            
             this.iUserBusiness = iUserBusiness;
             InitializeComponent();
         }
@@ -236,7 +237,8 @@ namespace PresentationLayer
         private void button_SignUp_Click(object sender, EventArgs e)
         {
             string emailAddress = textBox_Email.Text;
-            if (IsValidEmailAddress(emailAddress) == false)
+            
+            if (!IsValidEmailAddress(emailAddress))
                 label_Email.Visible = true;
             if (textBox_Password.Text != textBox_ConfirmPassword.Text)
                 label_ConfirmPassword.Visible = true;
@@ -247,7 +249,7 @@ namespace PresentationLayer
                 label_EmailExist.Visible = true;
                 label_EmailExistLogin.Visible = true;
             }
-            else
+            if(IsValidEmailAddress(emailAddress) && textBox_Password.Text == textBox_ConfirmPassword.Text && textBox_Password.Text != "Password" && !IsEmailAddressExist(textBox_Email.Text))
             {
                 label_EmailExist.Visible = false;
                 label_EmailExistLogin.Visible = false;
@@ -311,11 +313,17 @@ namespace PresentationLayer
 
         private void buttonShowHideConfirmPassword_Click(object sender, EventArgs e)
         {
-            TogglePasswordTextVisibility(new List<Button> { buttonShowHidePassword, buttonShowHideConfirmPassword }, new List<TextBox> { textBox_Password, textBox_ConfirmPassword });
+            TogglePasswordTextVisibility(new List<Button> { buttonShowHidePassword, buttonShowHideConfirmPassword, buttonShowHidePasswordLogin }, new List<TextBox> { textBox_Password, textBox_ConfirmPassword, textBox_PasswordLogin });
+            
         }
         private void buttonShowHidePassword_Click(object sender, EventArgs e)
         {
-            TogglePasswordTextVisibility(new List<Button> { buttonShowHidePassword, buttonShowHideConfirmPassword }, new List<TextBox> { textBox_Password, textBox_ConfirmPassword });
+            TogglePasswordTextVisibility(new List<Button> { buttonShowHidePassword, buttonShowHideConfirmPassword, buttonShowHidePasswordLogin }, new List<TextBox> { textBox_Password, textBox_ConfirmPassword, textBox_PasswordLogin });
+
+        }
+        private void buttonShowHidePasswordLogin_Click(object sender, EventArgs e)
+        {
+            TogglePasswordTextVisibility(new List<Button> { buttonShowHidePassword, buttonShowHideConfirmPassword, buttonShowHidePasswordLogin }, new List<TextBox> { textBox_Password, textBox_ConfirmPassword, textBox_PasswordLogin });
         }
         private void label_EmailExistLogin_Click(object sender, EventArgs e)
         {
@@ -338,12 +346,21 @@ namespace PresentationLayer
             foreach (var button in buttons)
             {
                 if (textBoxes[0].UseSystemPasswordChar)
-
+                {
                     button.BackgroundImage = global::PresentationLayer.Properties.Resources.show;
-
+                    if (textBoxes[0].Text == "")
+                        textBoxes[0].Text = "Password";
+                    if (textBoxes[1].Text == "")
+                        textBoxes[1].Text = "Confirm Password";
+                }
                 else
+                {
                     button.BackgroundImage = global::PresentationLayer.Properties.Resources.hide;
-
+                    if(textBoxes[0].Text == "Password")
+                        textBoxes[0].Text = "";
+                    if (textBoxes[1].Text == "Confirm Password")
+                        textBoxes[1].Text = "";
+                }
             }
 
 
@@ -359,14 +376,17 @@ namespace PresentationLayer
             // buttons[1] => buttonNumbers
             // buttons[2] => buttonUppercase
             // buttons[3] => buttonLowercase
-
-            for (int i = 0; i < requirements.Count - 1; i++)
+            if(textBox_Password.Text != "Password")
             {
-                if (requirements[i])
-                    buttons[i].BackgroundImage = global::PresentationLayer.Properties.Resources.success;
-                else
-                    buttons[i].BackgroundImage = global::PresentationLayer.Properties.Resources.warning;
+                for (int i = 0; i < requirements.Count - 1; i++)
+                {
+                    if (requirements[i])
+                        buttons[i].BackgroundImage = global::PresentationLayer.Properties.Resources.success;
+                    else
+                        buttons[i].BackgroundImage = global::PresentationLayer.Properties.Resources.warning;
+                }
             }
+            
         }
 
         private void ResetRequirementsIcons(List<Button> buttons)
@@ -385,6 +405,24 @@ namespace PresentationLayer
         {
 
         }
+
+
+        private void textBoxMasterPassword_TextChanged(object sender, EventArgs e)
+        {
+
+            string password = textBox_Password.Text;
+            List<Button> buttons = new List<Button>() { buttonLength, buttonNumbers, buttonLowercase, buttonUppercase };
+
+            List<bool> requirements = IsValidPassword(password);
+
+
+            if (password == "")
+                ResetRequirementsIcons(buttons);
+            else
+                ChangeRequirementsIcons(buttons, requirements);
+        }
+
+       
     }
 
 }
