@@ -196,40 +196,40 @@ namespace PresentationLayer
             int k = 0;
             string password = textBox_Password.Text;
             List<Boolean> checks = new List<Boolean>();
-            checks = IsValidPassword(password);
-            for (int i = 0; i < 4; i++)
+            if (password != "Password")
             {
-                bool check = checks[i];
 
-                if (check)
-                    k++;
+
+                checks = IsValidPassword(password);
+                for (int i = 0; i < 4; i++)
+                {
+                    bool check = checks[i];
+
+                    if (check)
+                        k++;
+                }
+                if (k == 0)
+                {
+                    panel_1.BackColor = Color.White;
+                    panel_3.BackColor = Color.White;
+                    panel_4.BackColor = Color.White;
+                }
+                if (k > 0)
+
+                    panel_1.BackColor = Color.FromArgb(250, 54, 1);
+                else
+                    panel_1.BackColor = Color.White;
+
+                if (k > 1)
+                    panel_3.BackColor = Color.FromArgb(250, 213, 1);
+                else
+                    panel_3.BackColor = Color.White;
+                if (k > 2)
+                    panel_4.BackColor = Color.FromArgb(0, 128, 0);
+                else
+                    panel_4.BackColor = Color.White;
+
             }
-            if (k == 0)
-            {
-                panel_1.BackColor = Color.White;
-                panel_2.BackColor = Color.White;
-                panel_3.BackColor = Color.White;
-                panel_4.BackColor = Color.White;
-            }
-            if (k > 0)
-
-                panel_1.BackColor = Color.FromArgb(250, 54, 1);
-            else
-                panel_1.BackColor = Color.White;
-            if (k > 1)
-                panel_2.BackColor = Color.FromArgb(250, 130, 0);
-            else
-                panel_2.BackColor = Color.White;
-            if (k > 2)
-                panel_3.BackColor = Color.FromArgb(250, 213, 1);
-            else
-                panel_3.BackColor = Color.White;
-            if (k > 3)
-                panel_4.BackColor = Color.FromArgb(0, 128, 0);
-            else
-                panel_4.BackColor = Color.White;
-
-
             string pass = textBox_Password.Text;
             List<Button> buttons = new List<Button>() { buttonLength, buttonNumbers, buttonLowercase, buttonUppercase };
 
@@ -259,7 +259,7 @@ namespace PresentationLayer
                 label_EmailExist.Visible = true;
                 label_EmailExistLogin.Visible = true;
             }
-            if(IsValidEmailAddress(emailAddress) && textBox_Password.Text == textBox_ConfirmPassword.Text && textBox_Password.Text != "Password" && !IsEmailAddressExist(textBox_Email.Text))
+            if (IsValidEmailAddress(emailAddress) && textBox_Password.Text == textBox_ConfirmPassword.Text && textBox_Password.Text != "Password" && !IsEmailAddressExist(textBox_Email.Text) && panel_4.BackColor == Color.FromArgb(0, 128, 0)) 
             {
                 label_EmailExist.Visible = false;
                 label_EmailExistLogin.Visible = false;
@@ -362,6 +362,8 @@ namespace PresentationLayer
                         textBoxes[0].Text = "Password";
                     if (textBoxes[1].Text == "")
                         textBoxes[1].Text = "Confirm Password";
+                    if (textBoxes[2].Text == "")
+                        textBoxes[2].Text = "Password";
                 }
                 else
                 {
@@ -370,6 +372,8 @@ namespace PresentationLayer
                         textBoxes[0].Text = "";
                     if (textBoxes[1].Text == "Confirm Password")
                         textBoxes[1].Text = "";
+                    if (textBoxes[2].Text == "Password")
+                        textBoxes[2].Text = "";
                 }
             }
 

@@ -49,7 +49,6 @@ namespace PresentationLayer {
             this.label_EmailExist = new System.Windows.Forms.Label();
             this.panel_4 = new System.Windows.Forms.Panel();
             this.panel_3 = new System.Windows.Forms.Panel();
-            this.panel_2 = new System.Windows.Forms.Panel();
             this.panel_1 = new System.Windows.Forms.Panel();
             this.label_ConfirmPassword = new System.Windows.Forms.Label();
             this.label_Password = new System.Windows.Forms.Label();
@@ -95,6 +94,7 @@ namespace PresentationLayer {
             this.textBox_ConfirmPassword.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_ConfirmPassword.ForeColor = System.Drawing.SystemColors.GrayText;
             this.textBox_ConfirmPassword.Location = new System.Drawing.Point(30, 251);
+            this.textBox_ConfirmPassword.MaxLength = 20;
             this.textBox_ConfirmPassword.MinimumSize = new System.Drawing.Size(200, 18);
             this.textBox_ConfirmPassword.Name = "textBox_ConfirmPassword";
             this.textBox_ConfirmPassword.Size = new System.Drawing.Size(225, 18);
@@ -110,6 +110,7 @@ namespace PresentationLayer {
             this.textBox_Password.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_Password.ForeColor = System.Drawing.SystemColors.GrayText;
             this.textBox_Password.Location = new System.Drawing.Point(30, 77);
+            this.textBox_Password.MaxLength = 20;
             this.textBox_Password.MinimumSize = new System.Drawing.Size(200, 18);
             this.textBox_Password.Name = "textBox_Password";
             this.textBox_Password.Size = new System.Drawing.Size(225, 18);
@@ -127,6 +128,7 @@ namespace PresentationLayer {
             this.textBox_Email.ForeColor = System.Drawing.SystemColors.GrayText;
             this.textBox_Email.Location = new System.Drawing.Point(30, 33);
             this.textBox_Email.MaximumSize = new System.Drawing.Size(260, 18);
+            this.textBox_Email.MaxLength = 30;
             this.textBox_Email.MinimumSize = new System.Drawing.Size(200, 18);
             this.textBox_Email.Name = "textBox_Email";
             this.textBox_Email.Size = new System.Drawing.Size(249, 18);
@@ -165,7 +167,6 @@ namespace PresentationLayer {
             this.panel_Registration.Controls.Add(this.label_EmailExist);
             this.panel_Registration.Controls.Add(this.panel_4);
             this.panel_Registration.Controls.Add(this.panel_3);
-            this.panel_Registration.Controls.Add(this.panel_2);
             this.panel_Registration.Controls.Add(this.panel_1);
             this.panel_Registration.Controls.Add(this.label_ConfirmPassword);
             this.panel_Registration.Controls.Add(this.label_Password);
@@ -332,29 +333,20 @@ namespace PresentationLayer {
             // panel_4
             // 
             this.panel_4.BackColor = System.Drawing.Color.White;
-            this.panel_4.Location = new System.Drawing.Point(171, 103);
+            this.panel_4.Location = new System.Drawing.Point(161, 103);
             this.panel_4.Margin = new System.Windows.Forms.Padding(0);
             this.panel_4.Name = "panel_4";
-            this.panel_4.Size = new System.Drawing.Size(50, 5);
+            this.panel_4.Size = new System.Drawing.Size(70, 5);
             this.panel_4.TabIndex = 30;
             // 
             // panel_3
             // 
             this.panel_3.BackColor = System.Drawing.Color.White;
-            this.panel_3.Location = new System.Drawing.Point(121, 103);
+            this.panel_3.Location = new System.Drawing.Point(91, 103);
             this.panel_3.Margin = new System.Windows.Forms.Padding(0);
             this.panel_3.Name = "panel_3";
-            this.panel_3.Size = new System.Drawing.Size(50, 5);
+            this.panel_3.Size = new System.Drawing.Size(70, 5);
             this.panel_3.TabIndex = 30;
-            // 
-            // panel_2
-            // 
-            this.panel_2.BackColor = System.Drawing.Color.White;
-            this.panel_2.Location = new System.Drawing.Point(71, 103);
-            this.panel_2.Margin = new System.Windows.Forms.Padding(0);
-            this.panel_2.Name = "panel_2";
-            this.panel_2.Size = new System.Drawing.Size(50, 5);
-            this.panel_2.TabIndex = 30;
             // 
             // panel_1
             // 
@@ -362,7 +354,7 @@ namespace PresentationLayer {
             this.panel_1.Location = new System.Drawing.Point(21, 103);
             this.panel_1.Margin = new System.Windows.Forms.Padding(0);
             this.panel_1.Name = "panel_1";
-            this.panel_1.Size = new System.Drawing.Size(50, 5);
+            this.panel_1.Size = new System.Drawing.Size(70, 5);
             this.panel_1.TabIndex = 29;
             // 
             // label_ConfirmPassword
@@ -635,7 +627,6 @@ namespace PresentationLayer {
         private System.Windows.Forms.Panel panel_1;
         private System.Windows.Forms.Panel panel_4;
         private System.Windows.Forms.Panel panel_3;
-        private System.Windows.Forms.Panel panel_2;
         private System.Windows.Forms.Label label_EmailExistLogin;
         private System.Windows.Forms.Label label_EmailExist;
         private System.Windows.Forms.Button buttonShowHidePassword;
