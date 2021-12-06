@@ -108,6 +108,43 @@ namespace BusinessLayer {
 
         //  =================================== PASSWORD METHODS  ===================================
 
+
+
+
+        // Method for creating random password
+        public string CreateRandomPassword(int length)
+        {// Characters allowed in password
+            string upperCase = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
+            string lowerCase = "abcdefghijklmnopqrstuvwxyz";
+
+            string numbers = "0123456789";
+
+            string specialCharacters = "!@#$%^&*?_-";
+            Random random = new Random();
+
+
+            string all = $"{upperCase}{lowerCase}{numbers}{specialCharacters}";
+
+            char[] chars = new char[length];
+
+            // Ensure password has at least one uppercase, number and special character
+            chars[random.Next(0, length)] = upperCase[random.Next(0, upperCase.Length)];
+            chars[random.Next(0, length)] = numbers[random.Next(0, numbers.Length)];
+            chars[random.Next(0, length)] = specialCharacters[random.Next(0, specialCharacters.Length)];
+
+
+
+            for (int i = 0; i < length; i++)
+            {
+                if (chars[i] == '\0')
+                    chars[i] = all[random.Next(0, all.Length)];
+            }
+
+
+            return new string(chars);
+        }
+        // End of method CreateRandomPassword(int length)
+
         public int CalculatePasswordPoolSize(string password)
         {
             password.Trim();
@@ -171,48 +208,7 @@ namespace BusinessLayer {
 
         }
 
-        public int CalculatePasswordLengthScore(string password)
-        {
-
-            int Score = 0;
-
-            password.Trim();
-
-            int passwordLength = password.Length;
-
-            if (passwordLength > 12) Score = 10;
-            if (passwordLength >= 10 && passwordLength < 12) Score = 8;
-            if (passwordLength >= 8 && passwordLength < 10) Score = 6;
-            if (passwordLength >= 6 && passwordLength < 8) Score = 4;
-            if (passwordLength < 6) Score = 0;
-
-            return Score;
-        }
-
-
-
-        public int CalculatePasswordPoolSizeScore(string password)
-        {
-            int Score = 0;
-            int poolSize = CalculatePasswordPoolSize(password);
-
-            switch (poolSize)
-            {
-                case 26:
-                    return Score = 2;
-                case 36:
-                    return Score = 4;
-                case 52:
-                    return Score = 6;
-                case 62:
-                    return Score = 8;
-                case 94:
-                    return Score = 10;
-                default:
-                    return Score;
-            }
-        }
-
+       
         public int CalculatePasswordEntropyScore(string password) {
 
             int Score = 0;
@@ -231,41 +227,6 @@ namespace BusinessLayer {
             return Score;
 
         }
-
-
-        // Method for creating random password
-        public string CreateRandomPassword(int length)
-        {// Characters allowed in password
-            string upperCase = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
-            string lowerCase = "abcdefghijklmnopqrstuvwxyz";
-
-            string numbers = "0123456789";
-
-            string specialCharacters = "!@#$%^&*?_-";
-            Random random = new Random();
-
-
-            string all = $"{upperCase}{lowerCase}{numbers}{specialCharacters}";
-
-            char[] chars = new char[length];
-
-            // Ensure password has at least one uppercase, number and special character
-            chars[random.Next(0, length)] = upperCase[random.Next(0, upperCase.Length)];
-            chars[random.Next(0, length)] = numbers[random.Next(0, numbers.Length)];
-            chars[random.Next(0, length)] = specialCharacters[random.Next(0, specialCharacters.Length)];
-
-
-
-            for (int i = 0; i < length; i++)
-            {
-                if (chars[i] == '\0')
-                    chars[i] = all[random.Next(0, all.Length)];
-            }
-
-
-            return new string(chars);
-        }
-        // End of method CreateRandomPassword(int length)
 
 
         public bool CommonPasswordChecker(string password)
@@ -368,41 +329,49 @@ namespace BusinessLayer {
             return false;
         }
 
+        public bool isPasswordValid(string password)
+        {
+
+            List<bool> requirements = ValidationOfPasswordRequirements(password);
+
+            for (int i = 0; i < requirements.Count - 1; i++)
+            {
+                if (!requirements[i])
+                    return false;
+            }
+
+            return true;
+        }
 
 
 
-        public Dictionary<string, string> CalculatePasswordStrength(string password)
+
+        public string CalculatePasswordStrength(string password)
         {
 
             password.Trim();
 
-            Dictionary<string, string> resultScore = new Dictionary<string, string>();
 
+            string resultScore = "Weak";
 
-            if (IsPasswordPredictable(password) || CommonPasswordChecker(password))
+            if (IsPasswordPredictable(password) || CommonPasswordChecker(password) || !isPasswordValid(password))
             {
-                resultScore.Add("Strength", "Weak");
+                resultScore = "Weak";
                 return resultScore;
+
             }
 
-            int lengthScore = CalculatePasswordLengthScore(password);
-            int poolSizeScore = CalculatePasswordPoolSizeScore(password);
             int entropyScore = CalculatePasswordEntropyScore(password);
             int numberRangesScore = CalculateNumberRangesScore(password);
 
+            int averageScore = Convert.ToInt32((entropyScore + numberRangesScore) / 2.0);
 
-            int averageScore = Convert.ToInt32((lengthScore + poolSizeScore + entropyScore + numberRangesScore) / 4.0);
 
-            if (averageScore < 4)
-                resultScore.Add("Strength", "Weak");
-
-            else if (averageScore >= 4 && averageScore <= 8)
-                resultScore.Add("Strength", "Fair");
+            if (averageScore > 4 && averageScore <= 8)
+                resultScore = "Fair";
 
             else if (averageScore > 8)
-                resultScore.Add("Strength", "Strong");
-
-
+                resultScore = "Strong";
 
             return resultScore;
 
