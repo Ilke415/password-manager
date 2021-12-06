@@ -235,24 +235,6 @@ namespace BusinessLayer {
         }
 
 
-
-        //public Dictionary<string, string> PasswordDeriveBytesStrength(string password)
-        //{
-
-        //    password.Trim();
-        //    int lengthScore = CalculatePasswordLengthScore(password);
-        //    int poolSizeScore = CalculatePasswordPoolSizeScore(password);
-        //    int entropyScore = CalculatePasswordEntropyScore(password);
-
-
-
-        //}
-
-
-
-
-
-
         // Method for creating random password
         public string CreateRandomPassword(int length)
         {// Characters allowed in password
@@ -286,6 +268,34 @@ namespace BusinessLayer {
             return new string(chars);
         }
         // End of method CreateRandomPassword(int length)
+
+
+        public bool CommonPasswordChecker(string password)
+        {
+
+            password.Trim();
+            Regex filter = new Regex("(password|pass)", RegexOptions.IgnoreCase);
+
+            var match = filter.Match(password);
+
+            if (match.Success)
+                return true;
+
+
+
+            return false;
+
+        }
+
+        public int CalculateCommonPasswordScore(string password)
+        {
+            bool isCommonPassword = CommonPasswordChecker(password);
+
+            return isCommonPassword ? 4 : 8;
+
+        }
+
+
 
         public Dictionary<string, string> CalculatePasswordStrength(string password)
         {
@@ -323,11 +333,14 @@ namespace BusinessLayer {
         // =================================== CRYPTOGRAPHY METHODS =================================== 
 
         // Generate 24bytes long PBKDF2 hash 
-        public byte[] CreatePBKDF2Hash(string input, byte[] salt)
+        public byte[] CreatePBKDF2Hash(string input, byte[] salt, int lengthInBytes)
         {
             // Generate the hash
             Rfc2898DeriveBytes pbkdf2 = new Rfc2898DeriveBytes(input, salt, iterations: 10000); // hard coded 10000 iterations
-            return pbkdf2.GetBytes(24); //24 bytes length is 192 bits
+            return pbkdf2.GetBytes(lengthInBytes); 
+            // 24 bytes(192 bits) is for AuthKey
+            // 32 bytes(256 bits) is for encryption/decryption key for AES256
+
         }
 
 
@@ -352,7 +365,7 @@ namespace BusinessLayer {
         public string CreateAuthKey(string password, string email, byte[] salt)
         {
             // This must reworked because you didn't append masterPassword again in function
-            byte[] AuthKeyHash = CreatePBKDF2Hash(Convert.ToBase64String(CreatePBKDF2Hash(password + email, salt)) + password, salt);
+            byte[] AuthKeyHash = CreatePBKDF2Hash(Convert.ToBase64String(CreatePBKDF2Hash(password + email, salt, 24)) + password, salt, 24);
 
 
             return Convert.ToBase64String(AuthKeyHash);
@@ -367,7 +380,8 @@ namespace BusinessLayer {
         // Method for inserting new User in database
         public void InsertUser(string password, string emailAddress)
         {
-
+            password.Trim();
+            emailAddress.Trim();
 
             // Create AuthKey and salt 
             byte[] saltBytes = CreateHashSalt();
