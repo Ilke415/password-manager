@@ -101,6 +101,24 @@ namespace BusinessLayer {
         }
         // End of method  IsEmailAddressExist(string emailAddress)
 
+        public bool LoginValidation(string emailAddress, string password)
+        {
+            Dictionary<string, string> AuthKeyAndSalt = userRepository.GetAuthKeyAndSalt(emailAddress);
+
+            string AuthKeyFromDataBase = AuthKeyAndSalt["AuthKey"];
+
+            byte[] salt = Convert.FromBase64String(AuthKeyAndSalt["Salt"]);
+
+
+            string AuthKey = CreateAuthKey(password, emailAddress, salt);
+
+            if (AuthKeyFromDataBase == AuthKey)
+                return true;
+
+
+            return false;
+        }
+
 
 
         //  =================================== END OF VALIDATION METHODS  ===================================

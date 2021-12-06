@@ -64,8 +64,8 @@ namespace DataLayer
                 using (SqlCommand sqlCommand = new SqlCommand())
                 {
                     sqlCommand.Connection = sqlConnection;
-                    sqlCommand.CommandText = "SELECT AuthKey, Salt FROM USERS WHERE EmailAddress = @emailAddres";
-                    sqlCommand.Parameters.AddWithValue("@emailAddres", emailAddress);
+                    sqlCommand.CommandText = "SELECT AuthKey, Salt FROM USERS WHERE EmailAddress = @emailAddress";
+                    sqlCommand.Parameters.AddWithValue("@emailAddress", emailAddress);
                     SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
                     dict.Add("AuthKey", sqlDataReader.GetString(0));

@@ -12,7 +12,7 @@ namespace Shared.Interfaces {
         string CreateRandomPassword(int length);
         bool IsEmailAddressExist(string emailAddress);
         void InsertUser(string emailAddress, string password);
-
-        Dictionary<string, string> CalculatePasswordStrength(string password);
+        string CalculatePasswordStrength(string password);
+        bool LoginValidation(string emailAddress, string password);
     }
 }
