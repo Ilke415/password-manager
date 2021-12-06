@@ -174,7 +174,7 @@ namespace PresentationLayer {
             this.panel_Registration.Controls.Add(this.label4);
             this.panel_Registration.Controls.Add(this.label5);
             this.panel_Registration.Controls.Add(this.label6);
-            this.panel_Registration.Location = new System.Drawing.Point(306, 108);
+            this.panel_Registration.Location = new System.Drawing.Point(627, 108);
             this.panel_Registration.Margin = new System.Windows.Forms.Padding(0);
             this.panel_Registration.Name = "panel_Registration";
             this.panel_Registration.Size = new System.Drawing.Size(313, 379);
@@ -269,9 +269,9 @@ namespace PresentationLayer {
             this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(61, 211);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(142, 13);
+            this.label3.Size = new System.Drawing.Size(119, 13);
             this.label3.TabIndex = 42;
-            this.label3.Text = "At least 12 characters long";
+            this.label3.Text = "At least 12 upper case";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label2
@@ -280,9 +280,9 @@ namespace PresentationLayer {
             this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(61, 179);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(142, 13);
+            this.label2.Size = new System.Drawing.Size(111, 13);
             this.label2.TabIndex = 41;
-            this.label2.Text = "At least 12 characters long";
+            this.label2.Text = "At least 1 lower case";
             // 
             // label1
             // 
@@ -290,9 +290,9 @@ namespace PresentationLayer {
             this.label1.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(61, 150);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(142, 13);
+            this.label1.Size = new System.Drawing.Size(97, 13);
             this.label1.TabIndex = 40;
-            this.label1.Text = "At least 12 characters long";
+            this.label1.Text = "At least 1 number";
             // 
             // label10
             // 
@@ -592,7 +592,7 @@ namespace PresentationLayer {
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(625, 496);
+            this.ClientSize = new System.Drawing.Size(949, 496);
             this.Controls.Add(this.panel_Registration);
             this.Controls.Add(this.panel_LogIn);
             this.Controls.Add(this.button_RegisterChoose);

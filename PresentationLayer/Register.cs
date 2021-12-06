@@ -192,6 +192,7 @@ namespace PresentationLayer
 
         private void textBox_Password_TextChanged(object sender, EventArgs e)
         {
+
             int k = 0;
             string password = textBox_Password.Text;
             List<Boolean> checks = new List<Boolean>();
@@ -229,9 +230,18 @@ namespace PresentationLayer
                 panel_4.BackColor = Color.White;
 
 
+            string pass = textBox_Password.Text;
+            List<Button> buttons = new List<Button>() { buttonLength, buttonNumbers, buttonLowercase, buttonUppercase };
+
+            List<bool> requirements = IsValidPassword(pass);
 
 
-           
+            if (pass == "")
+                ResetRequirementsIcons(buttons);
+            else
+                ChangeRequirementsIcons(buttons, requirements);
+
+
         }
 
         private void button_SignUp_Click(object sender, EventArgs e)
@@ -410,16 +420,7 @@ namespace PresentationLayer
         private void textBoxMasterPassword_TextChanged(object sender, EventArgs e)
         {
 
-            string password = textBox_Password.Text;
-            List<Button> buttons = new List<Button>() { buttonLength, buttonNumbers, buttonLowercase, buttonUppercase };
-
-            List<bool> requirements = IsValidPassword(password);
-
-
-            if (password == "")
-                ResetRequirementsIcons(buttons);
-            else
-                ChangeRequirementsIcons(buttons, requirements);
+            
         }
 
        
