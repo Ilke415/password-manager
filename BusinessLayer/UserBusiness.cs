@@ -211,8 +211,6 @@ namespace BusinessLayer {
                 default:
                     return Score;
             }
-
-            return Score;
         }
 
         public int CalculatePasswordEntropyScore(string password) {
@@ -287,15 +285,6 @@ namespace BusinessLayer {
 
         }
 
-        public int CalculateCommonPasswordScore(string password)
-        {
-            bool isCommonPassword = CommonPasswordChecker(password);
-
-            return isCommonPassword ? 4 : 8;
-
-        }
-
-
         public List<string> ContainsNumbersInRange(string password)
         {
 
@@ -351,7 +340,7 @@ namespace BusinessLayer {
 
         public int CalculateNumberRangesScore(string password)
         {
-            int Score = 8;
+            int Score = 6;
 
             int countTriplets = CountTripletsInRange(password);
 
@@ -365,6 +354,21 @@ namespace BusinessLayer {
 
         }
 
+        public bool IsPasswordPredictable(string password)
+        {
+            password.Trim();
+
+            Regex filterLowerCaseRange = new Regex(@"[a-z]{8,}");
+            Regex filterUpperCaseRange = new Regex(@"[A-Z]{8,}");
+            Regex filterNumberRange = new Regex(@"[0-9]{8,}");
+
+            if (filterLowerCaseRange.IsMatch(password) || filterUpperCaseRange.IsMatch(password) || filterNumberRange.IsMatch(password))
+                return true;
+
+            return false;
+        }
+
+
 
 
         public Dictionary<string, string> CalculatePasswordStrength(string password)
@@ -374,14 +378,22 @@ namespace BusinessLayer {
 
             Dictionary<string, string> resultScore = new Dictionary<string, string>();
 
+
+            if (IsPasswordPredictable(password) || CommonPasswordChecker(password))
+            {
+                resultScore.Add("Strength", "Weak");
+                return resultScore;
+            }
+
             int lengthScore = CalculatePasswordLengthScore(password);
             int poolSizeScore = CalculatePasswordPoolSizeScore(password);
             int entropyScore = CalculatePasswordEntropyScore(password);
+            int numberRangesScore = CalculateNumberRangesScore(password);
 
 
-            int averageScore = (lengthScore + poolSizeScore + entropyScore) / 3;
+            int averageScore = Convert.ToInt32((lengthScore + poolSizeScore + entropyScore + numberRangesScore) / 4.0);
 
-            if (averageScore <= 4)
+            if (averageScore < 4)
                 resultScore.Add("Strength", "Weak");
 
             else if (averageScore >= 4 && averageScore <= 8)
