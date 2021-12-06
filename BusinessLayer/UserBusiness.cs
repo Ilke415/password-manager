@@ -319,7 +319,7 @@ namespace BusinessLayer {
 
         public int CalculateNumberRangesScore(string password)
         {
-            int Score = 6;
+            int Score = 8;
 
             int countTriplets = CountTripletsInRange(password);
 

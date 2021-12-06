@@ -186,60 +186,64 @@ namespace PresentationLayer
             this.ActiveControl = label_Email;
             panel_Registration.Visible = false;
             panel_LogIn.Visible = true;
-          
             button_LogInChoose.PerformClick();
+        }
+
+        private void ResetPasswordMeter(List<Panel> panels)
+        {
+            for (int i = 0; i < panels.Count; i++)
+            {
+                panels[i].BackColor = Color.LightGray;
+            }
+            
+        }
+
+        private void ChangePasswordMeter(List<Panel> panels, string strength)
+        {
+
+            if (strength == "Weak")
+            {
+                panels[0].BackColor = Color.FromArgb(250, 54, 1);
+                panels[1].BackColor = Color.LightGray;
+                panels[2].BackColor = Color.LightGray;
+            }
+
+            if (strength == "Fair")
+            {
+                panels[0].BackColor = Color.FromArgb(250, 54, 1);
+                panels[1].BackColor = Color.FromArgb(250, 213, 1);
+                panels[2].BackColor = Color.LightGray;
+            }
+            if (strength == "Strong")
+            {
+                panels[0].BackColor = Color.FromArgb(250, 54, 1);
+                panels[1].BackColor = Color.FromArgb(250, 213, 1);
+                panels[2].BackColor = Color.FromArgb(0, 128, 0);
+            }
+
         }
 
         private void textBox_Password_TextChanged(object sender, EventArgs e)
         {
-
-            int k = 0;
-            string password = textBox_Password.Text;
-            List<Boolean> checks = new List<Boolean>();
-            if (password != "Password")
-            {
-
-
-                checks = IsValidPassword(password);
-                for (int i = 0; i < 4; i++)
-                {
-                    bool check = checks[i];
-
-                    if (check)
-                        k++;
-                }
-                if (k == 0)
-                {
-                    panel_1.BackColor = Color.White;
-                    panel_3.BackColor = Color.White;
-                    panel_4.BackColor = Color.White;
-                }
-                if (k > 0)
-
-                    panel_1.BackColor = Color.FromArgb(250, 54, 1);
-                else
-                    panel_1.BackColor = Color.White;
-
-                if (k > 1)
-                    panel_3.BackColor = Color.FromArgb(250, 213, 1);
-                else
-                    panel_3.BackColor = Color.White;
-                if (k > 2)
-                    panel_4.BackColor = Color.FromArgb(0, 128, 0);
-                else
-                    panel_4.BackColor = Color.White;
-
-            }
             string pass = textBox_Password.Text;
             List<Button> buttons = new List<Button>() { buttonLength, buttonNumbers, buttonLowercase, buttonUppercase };
-
+            List<Panel> panels = new List<Panel>() { panel_1, panel_3, panel_4};
             List<bool> requirements = IsValidPassword(pass);
+
+            string strength = CalculatePasswordStrength(pass);
 
 
             if (pass == "")
+            {
                 ResetRequirementsIcons(buttons);
+                ResetPasswordMeter(panels);
+            }
             else
+            {
                 ChangeRequirementsIcons(buttons, requirements);
+                ChangePasswordMeter(panels, strength);
+            }
+             
 
 
         }
@@ -259,7 +263,7 @@ namespace PresentationLayer
                 label_EmailExist.Visible = true;
                 label_EmailExistLogin.Visible = true;
             }
-            if (IsValidEmailAddress(emailAddress) && textBox_Password.Text == textBox_ConfirmPassword.Text && textBox_Password.Text != "Password" && !IsEmailAddressExist(textBox_Email.Text) && CalculatePasswordStrength(textBox_Password.Text) == "Strong") 
+            if (IsValidEmailAddress(emailAddress) && textBox_Password.Text == textBox_ConfirmPassword.Text && textBox_Password.Text != "Password" && !IsEmailAddressExist(textBox_Email.Text) && CalculatePasswordStrength(textBox_Password.Text) != "Weak") 
             {
                 label_EmailExist.Visible = false;
                 label_EmailExistLogin.Visible = false;
@@ -293,10 +297,18 @@ namespace PresentationLayer
 
         private void button_LogIn_Click(object sender, EventArgs e)
         {
-            if (LoginValidation(textBox_EmailLogin.Text, textBox_PasswordLogin.Text))
+            if (!IsEmailAddressExist(textBox_EmailLogin.Text))
             {
-                MessageBox.Show("Succesful login");
+                label_EmailLogin.Visible = true;
+                return;
+            } 
+            if (!LoginValidation(textBox_EmailLogin.Text, textBox_PasswordLogin.Text))
+            {
+                label_EmailLogin.Visible = true;
+                return;
             }
+            else
+                MessageBox.Show("Succesful login");
         }
 
         private void checkBox_Uppercase_CheckedChanged(object sender, EventArgs e)

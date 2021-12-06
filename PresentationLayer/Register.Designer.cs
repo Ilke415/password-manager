@@ -58,7 +58,6 @@ namespace PresentationLayer {
             this.label6 = new System.Windows.Forms.Label();
             this.panel_LogIn = new System.Windows.Forms.Panel();
             this.buttonShowHidePasswordLogin = new System.Windows.Forms.Button();
-            this.label_PasswordLogin = new System.Windows.Forms.Label();
             this.label_EmailLogin = new System.Windows.Forms.Label();
             this.textBox_EmailLogin = new System.Windows.Forms.TextBox();
             this.textBox_PasswordLogin = new System.Windows.Forms.TextBox();
@@ -78,6 +77,7 @@ namespace PresentationLayer {
             this.button_SignUp.FlatAppearance.BorderSize = 2;
             this.button_SignUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_SignUp.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_SignUp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(85)))), ((int)(((byte)(148)))));
             this.button_SignUp.Location = new System.Drawing.Point(78, 292);
             this.button_SignUp.Name = "button_SignUp";
             this.button_SignUp.Size = new System.Drawing.Size(161, 46);
@@ -94,10 +94,10 @@ namespace PresentationLayer {
             this.textBox_ConfirmPassword.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_ConfirmPassword.ForeColor = System.Drawing.SystemColors.GrayText;
             this.textBox_ConfirmPassword.Location = new System.Drawing.Point(30, 251);
-            this.textBox_ConfirmPassword.MaxLength = 20;
+            this.textBox_ConfirmPassword.MaxLength = 50;
             this.textBox_ConfirmPassword.MinimumSize = new System.Drawing.Size(200, 18);
             this.textBox_ConfirmPassword.Name = "textBox_ConfirmPassword";
-            this.textBox_ConfirmPassword.Size = new System.Drawing.Size(225, 18);
+            this.textBox_ConfirmPassword.Size = new System.Drawing.Size(214, 18);
             this.textBox_ConfirmPassword.TabIndex = 17;
             this.textBox_ConfirmPassword.Text = "Confirm Password";
             this.textBox_ConfirmPassword.TextChanged += new System.EventHandler(this.textBoxMasterPassword_TextChanged);
@@ -110,10 +110,10 @@ namespace PresentationLayer {
             this.textBox_Password.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBox_Password.ForeColor = System.Drawing.SystemColors.GrayText;
             this.textBox_Password.Location = new System.Drawing.Point(30, 77);
-            this.textBox_Password.MaxLength = 20;
+            this.textBox_Password.MaxLength = 50;
             this.textBox_Password.MinimumSize = new System.Drawing.Size(200, 18);
             this.textBox_Password.Name = "textBox_Password";
-            this.textBox_Password.Size = new System.Drawing.Size(225, 18);
+            this.textBox_Password.Size = new System.Drawing.Size(214, 18);
             this.textBox_Password.TabIndex = 16;
             this.textBox_Password.Tag = "273, 18";
             this.textBox_Password.Text = "Password";
@@ -128,7 +128,7 @@ namespace PresentationLayer {
             this.textBox_Email.ForeColor = System.Drawing.SystemColors.GrayText;
             this.textBox_Email.Location = new System.Drawing.Point(30, 33);
             this.textBox_Email.MaximumSize = new System.Drawing.Size(260, 18);
-            this.textBox_Email.MaxLength = 30;
+            this.textBox_Email.MaxLength = 50;
             this.textBox_Email.MinimumSize = new System.Drawing.Size(200, 18);
             this.textBox_Email.Name = "textBox_Email";
             this.textBox_Email.Size = new System.Drawing.Size(249, 18);
@@ -270,9 +270,9 @@ namespace PresentationLayer {
             this.label3.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(61, 211);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(119, 13);
+            this.label3.Size = new System.Drawing.Size(140, 13);
             this.label3.TabIndex = 42;
-            this.label3.Text = "At least 12 upper case";
+            this.label3.Text = "At least 1 uppercase letter";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label2
@@ -281,9 +281,9 @@ namespace PresentationLayer {
             this.label2.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(61, 179);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 13);
+            this.label2.Size = new System.Drawing.Size(138, 13);
             this.label2.TabIndex = 41;
-            this.label2.Text = "At least 1 lower case";
+            this.label2.Text = "At least 1 lowercase letter";
             // 
             // label1
             // 
@@ -324,37 +324,37 @@ namespace PresentationLayer {
             this.label_EmailExist.ForeColor = System.Drawing.Color.Red;
             this.label_EmailExist.Location = new System.Drawing.Point(43, 341);
             this.label_EmailExist.Name = "label_EmailExist";
-            this.label_EmailExist.Size = new System.Drawing.Size(236, 13);
+            this.label_EmailExist.Size = new System.Drawing.Size(241, 13);
             this.label_EmailExist.TabIndex = 31;
-            this.label_EmailExist.Text = "Account with this email addres already exists";
+            this.label_EmailExist.Text = "Account with this email address already exists";
             this.label_EmailExist.Visible = false;
             this.label_EmailExist.Click += new System.EventHandler(this.label_EmailExist_Click);
             // 
             // panel_4
             // 
-            this.panel_4.BackColor = System.Drawing.Color.White;
-            this.panel_4.Location = new System.Drawing.Point(161, 103);
+            this.panel_4.BackColor = System.Drawing.Color.LightGray;
+            this.panel_4.Location = new System.Drawing.Point(202, 105);
             this.panel_4.Margin = new System.Windows.Forms.Padding(0);
             this.panel_4.Name = "panel_4";
-            this.panel_4.Size = new System.Drawing.Size(70, 5);
+            this.panel_4.Size = new System.Drawing.Size(91, 5);
             this.panel_4.TabIndex = 30;
             // 
             // panel_3
             // 
-            this.panel_3.BackColor = System.Drawing.Color.White;
-            this.panel_3.Location = new System.Drawing.Point(91, 103);
+            this.panel_3.BackColor = System.Drawing.Color.LightGray;
+            this.panel_3.Location = new System.Drawing.Point(111, 105);
             this.panel_3.Margin = new System.Windows.Forms.Padding(0);
             this.panel_3.Name = "panel_3";
-            this.panel_3.Size = new System.Drawing.Size(70, 5);
+            this.panel_3.Size = new System.Drawing.Size(91, 5);
             this.panel_3.TabIndex = 30;
             // 
             // panel_1
             // 
-            this.panel_1.BackColor = System.Drawing.Color.White;
-            this.panel_1.Location = new System.Drawing.Point(21, 103);
+            this.panel_1.BackColor = System.Drawing.Color.LightGray;
+            this.panel_1.Location = new System.Drawing.Point(21, 105);
             this.panel_1.Margin = new System.Windows.Forms.Padding(0);
             this.panel_1.Name = "panel_1";
-            this.panel_1.Size = new System.Drawing.Size(70, 5);
+            this.panel_1.Size = new System.Drawing.Size(91, 5);
             this.panel_1.TabIndex = 29;
             // 
             // label_ConfirmPassword
@@ -421,7 +421,6 @@ namespace PresentationLayer {
             // panel_LogIn
             // 
             this.panel_LogIn.Controls.Add(this.buttonShowHidePasswordLogin);
-            this.panel_LogIn.Controls.Add(this.label_PasswordLogin);
             this.panel_LogIn.Controls.Add(this.label_EmailLogin);
             this.panel_LogIn.Controls.Add(this.textBox_EmailLogin);
             this.panel_LogIn.Controls.Add(this.textBox_PasswordLogin);
@@ -452,27 +451,15 @@ namespace PresentationLayer {
             this.buttonShowHidePasswordLogin.UseVisualStyleBackColor = false;
             this.buttonShowHidePasswordLogin.Click += new System.EventHandler(this.buttonShowHidePasswordLogin_Click);
             // 
-            // label_PasswordLogin
-            // 
-            this.label_PasswordLogin.AutoSize = true;
-            this.label_PasswordLogin.ForeColor = System.Drawing.Color.Red;
-            this.label_PasswordLogin.Location = new System.Drawing.Point(18, 58);
-            this.label_PasswordLogin.Name = "label_PasswordLogin";
-            this.label_PasswordLogin.Size = new System.Drawing.Size(94, 13);
-            this.label_PasswordLogin.TabIndex = 26;
-            this.label_PasswordLogin.Text = "Invalid password";
-            this.label_PasswordLogin.Visible = false;
-            this.label_PasswordLogin.Click += new System.EventHandler(this.label_PasswordLogin_Click);
-            // 
             // label_EmailLogin
             // 
             this.label_EmailLogin.AutoSize = true;
             this.label_EmailLogin.ForeColor = System.Drawing.Color.Red;
             this.label_EmailLogin.Location = new System.Drawing.Point(18, 12);
             this.label_EmailLogin.Name = "label_EmailLogin";
-            this.label_EmailLogin.Size = new System.Drawing.Size(114, 13);
+            this.label_EmailLogin.Size = new System.Drawing.Size(181, 13);
             this.label_EmailLogin.TabIndex = 25;
-            this.label_EmailLogin.Text = "Invalid email address";
+            this.label_EmailLogin.Text = "Invalid email address or password";
             this.label_EmailLogin.Visible = false;
             // 
             // textBox_EmailLogin
@@ -509,7 +496,7 @@ namespace PresentationLayer {
             this.button_LogIn.FlatAppearance.BorderSize = 2;
             this.button_LogIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_LogIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_LogIn.ForeColor = System.Drawing.Color.Black;
+            this.button_LogIn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(85)))), ((int)(((byte)(148)))));
             this.button_LogIn.Location = new System.Drawing.Point(78, 292);
             this.button_LogIn.Name = "button_LogIn";
             this.button_LogIn.Size = new System.Drawing.Size(161, 46);
@@ -618,7 +605,6 @@ namespace PresentationLayer {
         private System.Windows.Forms.Button button_LogIn;
         private System.Windows.Forms.Label label_Password;
         private System.Windows.Forms.Label label_Email;
-        private System.Windows.Forms.Label label_PasswordLogin;
         private System.Windows.Forms.Label label_EmailLogin;
         private System.Windows.Forms.Button button_RegisterChoose;
         private System.Windows.Forms.Button button_LogInChoose;
