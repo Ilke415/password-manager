@@ -259,7 +259,7 @@ namespace PresentationLayer
                 label_EmailExist.Visible = true;
                 label_EmailExistLogin.Visible = true;
             }
-            if (IsValidEmailAddress(emailAddress) && textBox_Password.Text == textBox_ConfirmPassword.Text && textBox_Password.Text != "Password" && !IsEmailAddressExist(textBox_Email.Text) && panel_4.BackColor == Color.FromArgb(0, 128, 0)) 
+            if (IsValidEmailAddress(emailAddress) && textBox_Password.Text == textBox_ConfirmPassword.Text && textBox_Password.Text != "Password" && !IsEmailAddressExist(textBox_Email.Text) && CalculatePasswordStrength(textBox_Password.Text) == "Strong") 
             {
                 label_EmailExist.Visible = false;
                 label_EmailExistLogin.Visible = false;
@@ -293,7 +293,10 @@ namespace PresentationLayer
 
         private void button_LogIn_Click(object sender, EventArgs e)
         {
-
+            if (LoginValidation(textBox_EmailLogin.Text, textBox_PasswordLogin.Text))
+            {
+                MessageBox.Show("Succesful login");
+            }
         }
 
         private void checkBox_Uppercase_CheckedChanged(object sender, EventArgs e)
@@ -411,15 +414,22 @@ namespace PresentationLayer
             }
 
         }
+        bool LoginValidation(string emailAddress, string password)
+        {
+            return iUserBusiness.LoginValidation(emailAddress, password);
+        }
 
 
-       
 
         private void label3_Click(object sender, EventArgs e)
         {
 
         }
 
+        public string CalculatePasswordStrength(string password)
+        {
+            return iUserBusiness.CalculatePasswordStrength(password);
+        }
 
         private void textBoxMasterPassword_TextChanged(object sender, EventArgs e)
         {
