@@ -296,6 +296,76 @@ namespace BusinessLayer {
         }
 
 
+        public List<string> ContainsNumbersInRange(string password)
+        {
+
+            password.Trim();
+
+            Regex filter = new Regex(@"[0-9]{3,}");
+
+            List<string> matchesList = new List<string>();
+            foreach (Match match in filter.Matches(password))
+            {
+                matchesList.Add(match.ToString());
+            }
+
+
+
+            return matchesList;
+        }
+
+        public int CountTripletsInRange(string password)
+        {
+
+            int countTripletsSeries = 0;
+
+            List<string> matchesList = ContainsNumbersInRange(password);
+            foreach (string match in matchesList)
+            {
+                for (int i = 0; i < match.Length; i++)
+                {
+                    int first = (int)match[i] - '0';
+                    // formula for sum from a .. b is (n/2)*(a+b)
+                    int regularSum = Convert.ToInt32(((3 / 2.0)) * (first * 2 + 2));
+
+                    int sum = 0;
+                    int j = i;
+
+                    if (j + 2 >= match.Length)
+                        break;
+                    for (j = i; j < i + 3; j++)
+                    {
+                        int value = (int)match[j] - '0';
+                        sum += value;
+                    }
+
+                    if (regularSum == sum)
+                        countTripletsSeries++;
+                }
+            }
+
+
+            return countTripletsSeries;
+
+        }
+
+        public int CalculateNumberRangesScore(string password)
+        {
+            int Score = 8;
+
+            int countTriplets = CountTripletsInRange(password);
+
+            if (countTriplets != 0)
+                Score += countTriplets * (-1);
+
+
+
+            return Score;
+
+
+        }
+
+
 
         public Dictionary<string, string> CalculatePasswordStrength(string password)
         {
