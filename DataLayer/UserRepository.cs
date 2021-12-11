@@ -68,9 +68,11 @@ namespace DataLayer
                     sqlCommand.Parameters.AddWithValue("@emailAddress", emailAddress);
                     SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
 
-
-                    dict.Add("AuthKey", sqlDataReader.GetString(0));
-                    dict.Add("Salt", sqlDataReader.GetString(1));
+                    while (sqlDataReader.Read())
+                    {
+                        dict.Add("AuthKey", sqlDataReader.GetString(0));
+                        dict.Add("Salt", sqlDataReader.GetString(1));
+                    }
                 }
 
             }
