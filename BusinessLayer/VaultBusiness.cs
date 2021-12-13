@@ -14,10 +14,12 @@ namespace BusinessLayer
     public class VaultBusiness : IVaultBusiness
     {
         private readonly IVaultRepository vaultRepository;
+        private readonly IUserRepository userRepository;
      
-        public VaultBusiness(IVaultRepository _vaultRepository)
+        public VaultBusiness(IVaultRepository _vaultRepository, IUserRepository _userRepository)
         {
             this.vaultRepository = _vaultRepository;
+            this.userRepository = _userRepository;
            
         }
         // ============================ METHODS FOR DATA MANIPULATION =================================
@@ -37,10 +39,30 @@ namespace BusinessLayer
         // ========================== END OF METHODS FOR DATA MANIPULATION ============================
 
 
-        public List<Vault> GetUserVaults(int UserID)
+       
+
+        public List<Vault> GetDecryptedUserVaults(User user, string password)
         {
 
-            return vaultRepository.GetUserVaults(UserID);
+            List<Vault> vaults = vaultRepository.GetUserVaults(user.UserID);
+
+            string salt = user.Salt;
+
+            string emailAddress = user.EmailAddress;
+
+            byte[] VaultKey = CryptoHelper.CreateVaultKey(emailAddress, password, salt);
+
+            foreach (Vault vault in vaults)
+            {
+                string decryptedVaultData = CryptoHelper.DecryptData(vault.VaultDataEncrypted, VaultKey);
+
+                VaultData vaultData = ConvertJsonStringToObjectVaultData(decryptedVaultData);
+
+                vault.VaultDataDecrypted = vaultData;
+            }
+
+
+            return vaults;
         
         }
         

@@ -54,15 +54,15 @@ namespace BusinessLayer
         // Formula: VaultKey = H(email,password)
         // H (hash function) = PBKDF2
 
-        public static  string createVaultKey(string emailAddress, string password, string saltBase64String)
+        public static byte[] CreateVaultKey(string emailAddress, string password, string saltBase64String)
         {
    
             byte[] salt = Convert.FromBase64String(saltBase64String);
 
-            byte[] VaultKeyHash = CreatePBKDF2Hash(emailAddress + password, salt, 32); // Key size is 32bytes(256bits) for AES256
+            byte[] VaultKey = CreatePBKDF2Hash(emailAddress + password, salt, 32); // Key size is 32bytes(256bits) for AES256
 
 
-            return Convert.ToBase64String(VaultKeyHash);
+            return VaultKey;
         }
 
         // AES SUPPORTS certain key sizes
