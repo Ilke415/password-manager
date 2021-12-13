@@ -14,10 +14,11 @@ namespace BusinessLayer
     public class VaultBusiness : IVaultBusiness
     {
         private readonly IVaultRepository vaultRepository;
-
+     
         public VaultBusiness(IVaultRepository _vaultRepository)
         {
             this.vaultRepository = _vaultRepository;
+           
         }
         // ============================ METHODS FOR DATA MANIPULATION =================================
 
@@ -36,20 +37,13 @@ namespace BusinessLayer
         // ========================== END OF METHODS FOR DATA MANIPULATION ============================
 
 
+        public List<Vault> GetUserVaults(int UserID)
+        {
 
-        // ================================ CRYPTOGRAPHY METHODS ====================================== 
-
-
-        // Method for decrypting Vaults
-
-
-
-
-
-
-
-        // ============================== END OF CRYPTOGRAPHY METHODS  ================================
-
+            return vaultRepository.GetUserVaults(UserID);
+        
+        }
+        
 
 
         //  ============================== METHODS FOR WORKING WITH DATABASE  =========================

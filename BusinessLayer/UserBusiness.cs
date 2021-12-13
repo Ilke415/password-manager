@@ -427,6 +427,12 @@ namespace BusinessLayer
 
         } // End of method InsertUser()
 
+        public User GetUserInformation(string email)
+        {
+            return userRepository.GetUserInformation(email);
+        }
+
+
         //  =================================== END OF METHODS FOR WORKING WITH DATABASE  =====================
 
     }

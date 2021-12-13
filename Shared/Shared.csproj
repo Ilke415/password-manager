@@ -43,7 +43,11 @@
   <ItemGroup>
     <Compile Include="Interfaces\IUserBusiness.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />
+    <Compile Include="Interfaces\IVaultBusiness.cs" />
+    <Compile Include="Interfaces\IVaultRepository.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Vault.cs" />
+    <Compile Include="Models\VaultData.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
