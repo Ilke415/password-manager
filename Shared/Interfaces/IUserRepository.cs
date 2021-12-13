@@ -14,5 +14,7 @@ namespace Shared.Interfaces
         void InsertUser(User user);
 
         Dictionary<string, string> GetAuthKeyAndSalt(string emailAddress);
+
+        User GetUserInformation(string email);
     }
 }

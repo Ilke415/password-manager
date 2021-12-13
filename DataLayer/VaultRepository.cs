@@ -11,30 +11,6 @@ namespace DataLayer
 {
     public class VaultRepository: IVaultRepository
     {
-        public User GetUserInformation(string email)
-        {
-            User user = new User();
-            using(SqlConnection sqlConnection = new SqlConnection(Helper.GetConnectionString("PasswordManagerDB")))
-            {
-                sqlConnection.Open();
-                using(SqlCommand sqlCommand = new SqlCommand())
-                {
-                    sqlCommand.Connection = sqlConnection;
-                    sqlCommand.CommandText = "SELECT * FROM USERS WHERE EmailAddress = @email";
-                    sqlCommand.Parameters.AddWithValue("@email", email);
-                    SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
-                    while(sqlDataReader.Read())
-                    {
-                        user.UserID = sqlDataReader.GetInt32(0);
-                        user.EmailAddress = sqlDataReader.GetString(1);
-                        user.AuthKey = sqlDataReader.GetString(2);
-                        user.Salt = sqlDataReader.GetString(3);
-                    }
-                }
-            }
-            return user;
-        }
-
         public List<Vault> GetUserVaults(int userID)
         {
             List<Vault> vaults = new List<Vault>();

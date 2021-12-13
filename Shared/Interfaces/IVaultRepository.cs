@@ -8,8 +8,7 @@ using Shared.Models;
 namespace Shared.Interfaces
 {
     public interface IVaultRepository
-    {
-        User GetUserInformation(string email);
+    { 
         List<Vault> GetUserVaults(int userID);
     }
 }
