@@ -11,7 +11,7 @@ namespace DataLayer
 {
     public class VaultRepository: IVaultRepository
     {
-        public User GetUserByEmailAndAuthKey(string email, string authKey)
+        public User GetUserInformation(string email)
         {
             User user = new User();
             using(SqlConnection sqlConnection = new SqlConnection(Helper.GetConnectionString("PasswordManagerDB")))
@@ -20,9 +20,8 @@ namespace DataLayer
                 using(SqlCommand sqlCommand = new SqlCommand())
                 {
                     sqlCommand.Connection = sqlConnection;
-                    sqlCommand.CommandText = "SELECT * FROM USERS WHERE EmailAddress = @email AND AuthKey = @authKey";
+                    sqlCommand.CommandText = "SELECT * FROM USERS WHERE EmailAddress = @email";
                     sqlCommand.Parameters.AddWithValue("@email", email);
-                    sqlCommand.Parameters.AddWithValue("@authKey", authKey);
                     SqlDataReader sqlDataReader = sqlCommand.ExecuteReader();
                     while(sqlDataReader.Read())
                     {

@@ -9,7 +9,7 @@ namespace Shared.Interfaces
 {
     public interface IVaultRepository
     {
-        User GetUserByEmailAndAuthKey(string email, string authKey);
+        User GetUserInformation(string email);
         List<Vault> GetUserVaults(int userID);
     }
 }
