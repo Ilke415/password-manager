@@ -14,5 +14,7 @@ namespace Shared.Interfaces {
         void InsertUser(string emailAddress, string password);
         string CalculatePasswordStrength(string password);
         bool LoginValidation(string emailAddress, string password);
+        User GetUserInformation(string email);
+
     }
 }

@@ -46,6 +46,7 @@ namespace BusinessLayer
 
             List<Vault> vaults = vaultRepository.GetUserVaults(user.UserID);
 
+            
             string salt = user.Salt;
 
             string emailAddress = user.EmailAddress;
