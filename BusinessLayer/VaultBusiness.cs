@@ -14,13 +14,11 @@ namespace BusinessLayer
     public class VaultBusiness : IVaultBusiness
     {
         private readonly IVaultRepository vaultRepository;
-        private readonly IUserRepository userRepository;
+  
      
-        public VaultBusiness(IVaultRepository _vaultRepository, IUserRepository _userRepository)
+        public VaultBusiness(IVaultRepository _vaultRepository)
         {
             this.vaultRepository = _vaultRepository;
-            this.userRepository = _userRepository;
-           
         }
         // ============================ METHODS FOR DATA MANIPULATION =================================
 
@@ -39,46 +37,64 @@ namespace BusinessLayer
         // ========================== END OF METHODS FOR DATA MANIPULATION ============================
 
 
-       
+        //  ============================== METHODS FOR WORKING WITH DATABASE  =========================
 
-        public List<Vault> GetDecryptedUserVaults(User user, string password)
+        public List<Vault> GetUserVaults(User user, string password)
         {
 
             List<Vault> vaults = vaultRepository.GetUserVaults(user.UserID);
 
-            
-            string salt = user.Salt;
-
-            string emailAddress = user.EmailAddress;
-
-            byte[] VaultKey = CryptoHelper.CreateVaultKey(emailAddress, password, salt);
-
-            foreach (Vault vault in vaults)
+            if (vaults.Count != 0)
             {
-                string decryptedVaultData = CryptoHelper.DecryptData(vault.VaultDataEncrypted, VaultKey);
+                string salt = user.Salt;
 
-                VaultData vaultData = ConvertJsonStringToObjectVaultData(decryptedVaultData);
+                string emailAddress = user.EmailAddress;
 
-                vault.VaultDataDecrypted = vaultData;
+                byte[] VaultKey = CryptoHelper.CreateVaultKey(emailAddress, password, salt);
+
+                foreach (Vault vault in vaults)
+                {
+                    string decryptedVaultData = CryptoHelper.DecryptData(vault.VaultDataEncrypted, VaultKey);
+
+                    VaultData vaultData = ConvertJsonStringToObjectVaultData(decryptedVaultData);
+
+                    vault.VaultDataDecrypted = vaultData;
+                }
+
             }
-
-
             return vaults;
+
+        }
+
+        public void InsertVault(int userID, string vaultKey, VaultData vaultData)
+        {
+            string vaultDataJsonString = ConvertVaultDataObjectToJsonString(vaultData);
+
+            byte[] vaultKeyBytes = Convert.FromBase64String(vaultKey);
+
+            string vaultEncrypted = CryptoHelper.EncryptData(vaultDataJsonString, vaultKeyBytes);
+
+            vaultRepository.InsertVault(userID, vaultEncrypted);
+
+        }
+
+        public void DeleteVault(int userID, int vaultID)
+        {
+            vaultRepository.DeleteVault(userID, vaultID);
+        }
+
+        public void UpdateVault(int userID, int vaultID, string vaultKey, VaultData vaultData)
+        {
+
+            string vaultDataJsonString = ConvertVaultDataObjectToJsonString(vaultData);
+
+            byte[] vaultKeyBytes = Convert.FromBase64String(vaultKey);
+
+            string vaultEncrypted = CryptoHelper.EncryptData(vaultDataJsonString, vaultKeyBytes);
+
+            vaultRepository.UpdateVault(userID, vaultID, vaultEncrypted);
         
         }
-        
-
-
-        //  ============================== METHODS FOR WORKING WITH DATABASE  =========================
-
-
-
-
-
-
-
-
-
 
         //  ============================ END OF METHODS FOR WORKING WITH DATABASE  =====================
     }
