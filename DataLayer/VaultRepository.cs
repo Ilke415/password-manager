@@ -35,7 +35,7 @@ namespace DataLayer
             }
             return vaults;
         }
-        public void InserVault(int userID, string encryptedVaultData)
+        public void InsertVault(int userID, string encryptedVaultData)
         {
             using (SqlConnection sqlConnection = new SqlConnection(Helper.GetConnectionString("PasswordManagerDB")))
             {

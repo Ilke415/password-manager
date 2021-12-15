@@ -10,7 +10,7 @@ namespace Shared.Interfaces
     public interface IVaultRepository
     { 
         List<Vault> GetUserVaults(int userID);
-        void InserVault(int userID, string encryptedVaultData);
+        void InsertVault(int userID, string encryptedVaultData);
         void DeleteVault(int userID, int vaultID);
         void UpdateVault(int userID, int vaultID, string encryptedVaultData);
     }
