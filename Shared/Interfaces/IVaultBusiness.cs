@@ -9,7 +9,7 @@ namespace Shared.Interfaces
 {
     public interface IVaultBusiness
     {
-        List<Vault> GetUserVaults(User user, string password);
+        List<Vault> GetUserVaults(int userID, string vaultKey);
         void InsertVault(int userID, string vaultKey, VaultData vaultData);
         void DeleteVault(int userID, int vaultID);
         void UpdateVault(int userID, int vaultID, string vaultKey, VaultData vaultData);

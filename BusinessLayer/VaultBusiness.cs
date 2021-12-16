@@ -14,8 +14,8 @@ namespace BusinessLayer
     public class VaultBusiness : IVaultBusiness
     {
         private readonly IVaultRepository vaultRepository;
-  
-     
+
+
         public VaultBusiness(IVaultRepository _vaultRepository)
         {
             this.vaultRepository = _vaultRepository;
@@ -39,22 +39,19 @@ namespace BusinessLayer
 
         //  ============================== METHODS FOR WORKING WITH DATABASE  =========================
 
-        public List<Vault> GetUserVaults(User user, string password)
+        public List<Vault> GetUserVaults(int userID, string vaultKey)
         {
 
-            List<Vault> vaults = vaultRepository.GetUserVaults(user.UserID);
+            List<Vault> vaults = vaultRepository.GetUserVaults(userID);
 
             if (vaults.Count != 0)
             {
-                string salt = user.Salt;
 
-                string emailAddress = user.EmailAddress;
-
-                byte[] VaultKey = CryptoHelper.CreateVaultKey(emailAddress, password, salt);
+                byte[] vaultKeyBytes = Convert.FromBase64String(vaultKey);
 
                 foreach (Vault vault in vaults)
                 {
-                    string decryptedVaultData = CryptoHelper.DecryptData(vault.VaultDataEncrypted, VaultKey);
+                    string decryptedVaultData = CryptoHelper.DecryptData(vault.VaultDataEncrypted, vaultKeyBytes);
 
                     VaultData vaultData = ConvertJsonStringToObjectVaultData(decryptedVaultData);
 
@@ -93,7 +90,7 @@ namespace BusinessLayer
             string vaultEncrypted = CryptoHelper.EncryptData(vaultDataJsonString, vaultKeyBytes);
 
             vaultRepository.UpdateVault(userID, vaultID, vaultEncrypted);
-        
+
         }
 
         //  ============================ END OF METHODS FOR WORKING WITH DATABASE  =====================
