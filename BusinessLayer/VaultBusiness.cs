@@ -97,5 +97,11 @@ namespace BusinessLayer
         }
 
         //  ============================ END OF METHODS FOR WORKING WITH DATABASE  =====================
+
+
+        public string CreateVaultKey(string emailAddress, string password, string salt)
+        {
+            return Convert.ToBase64String(CryptoHelper.CreateVaultKey(emailAddress, password, salt));
+        }
     }
 }
