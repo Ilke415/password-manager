@@ -67,7 +67,7 @@ namespace DataLayer
                 using (SqlCommand sqlCommand = new SqlCommand())
                 {
                     sqlCommand.Connection = sqlConnection;
-                    sqlCommand.CommandText = "DELETE FROM VAULTS WHERE UserID = @userID AND VaultID = @vaultID)";
+                    sqlCommand.CommandText = "DELETE FROM VAULTS WHERE UserID = @userID AND VaultID = @vaultID";
                     sqlCommand.Parameters.AddWithValue("@userID", userID);
                     sqlCommand.Parameters.AddWithValue("@vaultID", vaultID);
                     try
