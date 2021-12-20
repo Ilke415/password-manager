@@ -52,7 +52,6 @@ namespace UserRepositoryTest
         [TestMethod]
         public void GetAuthKeyAndSaltTest()
         {
-
             Assert.IsNotNull(userRepository.GetAuthKeyAndSalt(user.EmailAddress));
         }
 
@@ -61,9 +60,6 @@ namespace UserRepositoryTest
         {
             Assert.IsNotNull(userRepository.GetUserInformation(user.EmailAddress));
         }
-
-
-
 
     }
 }
