@@ -326,16 +326,16 @@ namespace PresentationLayer
 
                 List<Vault> vaults = vaultBusiness.GetUserVaults(user.UserID, VaultKey);
 
-                thread = new Thread(() => OpenNewForm(user.UserID, user.EmailAddress, VaultKey, vaults, vaultBusiness, iUserBusiness));
+                thread = new Thread(() => OpenNewForm(user.UserID, user.EmailAddress, VaultKey, vaults, vaultBusiness));
                 thread.Start();
                 this.Dispose();
 
 
             }
         }
-        private void OpenNewForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness, IUserBusiness iUserBusiness)
+        private void OpenNewForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness, IUserBusiness userBusiness)
         {
-            Application.Run(new VaultForm(UserID, EmailAddress, VaultKey, vaults, vaultBusiness, iUserBusiness));
+            Application.Run(new VaultForm(UserID, EmailAddress, VaultKey, vaults, vaultBusiness, userBusiness));
         }
 
         private void checkBox_Uppercase_CheckedChanged(object sender, EventArgs e)

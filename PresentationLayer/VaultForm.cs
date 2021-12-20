@@ -39,7 +39,7 @@ namespace PresentationLayer
             refreshVolts();
 
         }
-        public void refreshVolts()
+        public static void refreshVolts()
         {
             labelUserEmailAddress.Text = EmailAddress;
 
@@ -223,6 +223,7 @@ namespace PresentationLayer
             thread = new Thread(() => OpenRegistrationForm(iUserBusiness, vaultBusiness));
             thread.Start();
             this.Dispose();
+
         }
         private void OpenRegistrationForm(IUserBusiness iUserBusiness, IVaultBusiness vaultBusiness)
         {
@@ -238,6 +239,11 @@ namespace PresentationLayer
         private void OpenNewVaultForm(int UserID, string VaultKey,  IVaultBusiness vaultBusiness)
         {
             Application.Run(new NewVault(UserID,  VaultKey,  vaultBusiness));
+        }
+
+        private void panelHeader_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

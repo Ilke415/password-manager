@@ -16,16 +16,16 @@ namespace PresentationLayer
     public partial class Edit : Form
     {
         private Thread thread;
-        private readonly IUserBusiness iUserBusiness;
+        
         private readonly IVaultBusiness vaultBusiness;
         private int UserID;
         private string EmailAddress;
         private string VaultKey;
         private List<Vault> vaults;
 
-        public Edit(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness, IUserBusiness iUserBusiness)
+        public Edit(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness)
         {
-            this.iUserBusiness = iUserBusiness;
+            
             this.UserID = UserID;
             this.EmailAddress = EmailAddress;
             this.VaultKey = VaultKey;
@@ -81,17 +81,16 @@ namespace PresentationLayer
             {
 
                 VaultData vaultData = new VaultData(url, name, username, password);
-                User user = iUserBusiness.GetUserInformation(EmailAddress);
+              
 
 
-                thread = new Thread(() => OpenVaultForm(user.UserID, user.EmailAddress, VaultKey, vaults, vaultBusiness));
-                thread.Start();
+                
                 this.Dispose();
             }
         }
-        private void OpenVaultForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness)
+        private void OpenVaultForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness, IUserBusiness iUserBusiness)
         {
-            Application.Run(new VaultForm(UserID, EmailAddress, VaultKey, vaults, vaultBusiness));
+            Application.Run(new VaultForm(UserID, EmailAddress, VaultKey, vaults, vaultBusiness,  iUserBusiness));
         }
         public void UpdateVault(int userID, int vaultID, string vaultKey, VaultData vaultData)
         {
