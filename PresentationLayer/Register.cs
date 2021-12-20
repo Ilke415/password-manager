@@ -234,8 +234,12 @@ namespace PresentationLayer
             List<Button> buttons = new List<Button>() { buttonLength, buttonNumbers, buttonLowercase, buttonUppercase };
             List<Panel> panels = new List<Panel>() { panel_1, panel_3, panel_4};
             List<bool> requirements = IsValidPassword(pass);
-
-            string strength = CalculatePasswordStrength(pass);
+            string strength = "";
+            if (textBox_Password.Text != "Password")
+            {
+                 strength = CalculatePasswordStrength(pass);
+            }
+                
 
 
             if (pass == "")

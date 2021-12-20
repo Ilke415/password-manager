@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,11 +15,13 @@ namespace PresentationLayer
 {
     public partial class VaultForm : Form
     {
+        private Thread thread;
         private int UserID;
         private string EmailAddress;
         private string VaultKey;
         private List<Vault> vaults;
         private readonly IVaultBusiness vaultBusiness;
+        private readonly IUserBusiness iUserBusiness;
         public VaultForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness)
         {
             this.UserID = UserID;
@@ -35,6 +38,7 @@ namespace PresentationLayer
 
             foreach (Vault vault in vaults)
             {
+                
                 VaultData vaultData = vault.VaultDataDecrypted;
 
                 int vaultID = vault.VaultID;
@@ -102,8 +106,9 @@ namespace PresentationLayer
                 flowLayoutPanelMain.Controls.Add(panel);
             }
 
-        }
 
+        }
+        
 
         private void UpdateVaults(List<Vault> vaults)
         {
@@ -189,6 +194,25 @@ namespace PresentationLayer
         private void flowLayoutPanelMain_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel1_Click(object sender, EventArgs e)
+        {
+            
+
+
+            thread = new Thread(() => OpenRegistrationForm(iUserBusiness, vaultBusiness));
+            thread.Start();
+            this.Dispose();
+        }
+        private void OpenRegistrationForm(IUserBusiness iUserBusiness, IVaultBusiness vaultBusiness)
+        {
+            Application.Run(new Form1(iUserBusiness, vaultBusiness));
         }
     }
 }

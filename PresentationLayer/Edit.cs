@@ -97,9 +97,6 @@ namespace PresentationLayer
                 if (dialogResult == DialogResult.Yes)
                 {
 
-                    User user = iUserBusiness.GetUserInformation(EmailAddress);
-                    thread = new Thread(() => OpenVaultForm(user.UserID, user.EmailAddress, VaultKey, vaults, vaultBusiness, iUserBusiness));
-                    thread.Start();
                     this.Dispose();
                 }
 

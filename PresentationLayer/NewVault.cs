@@ -76,7 +76,7 @@ namespace PresentationLayer
                 DialogResult dialogResult = MessageBox.Show("You have got unfinished work! Are you sure you want to quit?", "Warning", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-
+                    
                     this.Dispose();
                 }
 
