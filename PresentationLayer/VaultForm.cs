@@ -22,8 +22,9 @@ namespace PresentationLayer
         private List<Vault> vaults;
         private readonly IVaultBusiness vaultBusiness;
         private readonly IUserBusiness iUserBusiness;
-        public VaultForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness)
+        public VaultForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness, IUserBusiness iUserBusiness)
         {
+            this.iUserBusiness = iUserBusiness;
             this.UserID = UserID;
             this.EmailAddress = EmailAddress;
             this.VaultKey = VaultKey;
@@ -34,11 +35,17 @@ namespace PresentationLayer
 
         private void VaultForm_Load(object sender, EventArgs e)
         {
+
+            refreshVolts();
+
+        }
+        public void refreshVolts()
+        {
             labelUserEmailAddress.Text = EmailAddress;
 
             foreach (Vault vault in vaults)
             {
-                
+
                 VaultData vaultData = vault.VaultDataDecrypted;
 
                 int vaultID = vault.VaultID;
@@ -105,10 +112,7 @@ namespace PresentationLayer
 
                 flowLayoutPanelMain.Controls.Add(panel);
             }
-
-
         }
-        
 
         private void UpdateVaults(List<Vault> vaults)
         {

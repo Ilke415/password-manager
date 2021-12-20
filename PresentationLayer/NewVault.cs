@@ -19,11 +19,12 @@ namespace PresentationLayer
         private readonly IVaultBusiness vaultBusiness;
         private int UserID;
         private string VaultKey;
-   
+        private readonly IUserBusiness userBusiness;
 
 
-        public NewVault(int UserID,string VaultKey,IVaultBusiness vaultBusiness)
-        {   
+        public NewVault(int UserID,string VaultKey,IVaultBusiness vaultBusiness, IUserBusiness userBusiness)
+        {
+            this.userBusiness = userBusiness;
             this.UserID = UserID;
             this.VaultKey = VaultKey;  
             this.vaultBusiness = vaultBusiness;
@@ -47,15 +48,16 @@ namespace PresentationLayer
                 VaultData vaultData = new VaultData(url, name, username, password);
                 InsertVault(UserID, VaultKey, vaultData);
 
-               // thread = new Thread(() => OpenVaultForm(user.UserID, user.EmailAddress, VaultKey, vaults, vaultBusiness, iUserBusiness));
-                
+                // thread = new Thread(() => OpenVaultForm(user.UserID, user.EmailAddress, VaultKey, vaults, vaultBusiness, iUserBusiness));
+
+                refreshVolts();
                 this.Dispose();
             }
                 
         }
-        private void OpenVaultForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness)
+        private void OpenVaultForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness, IUserBusiness userBusiness)
         {
-            Application.Run(new VaultForm(UserID, EmailAddress, VaultKey, vaults, vaultBusiness));
+            Application.Run(new VaultForm(UserID, EmailAddress, VaultKey, vaults, vaultBusiness, userBusiness));
         }
 
         private void button_Confirm_Enter(object sender, EventArgs e)
