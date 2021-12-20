@@ -81,6 +81,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Edit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Edit.Designer.cs" />
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
     <Compile Include="Register.cs">
       <SubType>Form</SubType>
@@ -96,6 +100,7 @@
     <Compile Include="VaultForm.Designer.cs">
       <DependentUpon>VaultForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Edit.resx" />
     <EmbeddedResource Include="obj\Debug\PresentationLayer.Form1.resources" />
     <EmbeddedResource Include="obj\Debug\PresentationLayer.Properties.Resources.resources" />
     <EmbeddedResource Include="Register.resx">
