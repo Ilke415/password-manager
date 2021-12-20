@@ -37,6 +37,8 @@ namespace PresentationLayer
         {
             services.AddScoped<IUserBusiness, UserBusiness>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IVaultBusiness, VaultBusiness>();
+            services.AddScoped<IVaultRepository, VaultRepository>();
             services.AddScoped<Form1>();
         }
     }

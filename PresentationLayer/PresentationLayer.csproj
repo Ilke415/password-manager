@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -65,6 +65,11 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Threading.Thread, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Thread.4.3.0\lib\net46\System.Threading.Thread.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -85,6 +90,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VaultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VaultForm.Designer.cs">
+      <DependentUpon>VaultForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="obj\Debug\PresentationLayer.Form1.resources" />
     <EmbeddedResource Include="obj\Debug\PresentationLayer.Properties.Resources.resources" />
     <EmbeddedResource Include="Register.resx">
@@ -100,6 +111,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="VaultForm.resx">
+      <DependentUpon>VaultForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\Debug\PresentationLayer.csproj.AssemblyReference.cache" />
     <None Include="obj\Debug\PresentationLayer.csproj.CoreCompileInputs.cache" />
@@ -146,6 +160,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="obj\Debug\PresentationLayer.csproj.FileListAbsolute.txt" />
+    <None Include="Resources\UserLoginIcon.png" />
+    <None Include="Resources\logoutIcon.png" />
+    <None Include="Resources\FooterBackgroundImage.PNG" />
+    <None Include="Resources\AddNewIconHover.png" />
+    <None Include="Resources\AddNewIcon.png" />
     <None Include="Resources\blank.PNG" />
     <None Include="Resources\warning.PNG" />
     <None Include="Resources\success.PNG" />

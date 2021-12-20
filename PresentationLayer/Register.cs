@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,11 +16,15 @@ namespace PresentationLayer
     public partial class Form1 : Form
     {
         private readonly IUserBusiness iUserBusiness;
-        
-        public Form1(IUserBusiness iUserBusiness)
+        private readonly IVaultBusiness vaultBusiness;
+        private Thread thread;
+
+        public Form1(IUserBusiness iUserBusiness, IVaultBusiness vaultBusiness)
         {
             
             this.iUserBusiness = iUserBusiness;
+            this.vaultBusiness = vaultBusiness;
+
             InitializeComponent();
         }
         private void textBox_Email_TextChanged(object sender, EventArgs e)
@@ -218,7 +223,7 @@ namespace PresentationLayer
             {
                 panels[0].BackColor = Color.FromArgb(250, 54, 1);
                 panels[1].BackColor = Color.FromArgb(250, 213, 1);
-                panels[2].BackColor = Color.FromArgb(0, 128, 0);
+                panels[2].BackColor = Color.FromArgb(94, 217, 138);
             }
 
         }
@@ -297,18 +302,36 @@ namespace PresentationLayer
 
         private void button_LogIn_Click(object sender, EventArgs e)
         {
+            string emailAddress = textBox_EmailLogin.Text;
+            string password = textBox_PasswordLogin.Text;
             if (!IsEmailAddressExist(textBox_EmailLogin.Text))
             {
                 label_EmailLogin.Visible = true;
                 return;
-            } 
+            }
             if (!LoginValidation(textBox_EmailLogin.Text, textBox_PasswordLogin.Text))
             {
                 label_EmailLogin.Visible = true;
                 return;
             }
             else
-                MessageBox.Show("Succesful login");
+            {
+                User user = iUserBusiness.GetUserInformation(emailAddress);
+
+                string VaultKey = vaultBusiness.CreateVaultKey(emailAddress, password, user.Salt);
+
+                List<Vault> vaults = vaultBusiness.GetUserVaults(user.UserID, VaultKey);
+
+                thread = new Thread(() => OpenNewForm(user.UserID, user.EmailAddress, VaultKey, vaults, vaultBusiness));
+                thread.Start();
+                this.Dispose();
+
+
+            }
+        }
+        private void OpenNewForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness)
+        {
+            Application.Run(new VaultForm(UserID, EmailAddress, VaultKey, vaults, vaultBusiness));
         }
 
         private void checkBox_Uppercase_CheckedChanged(object sender, EventArgs e)
