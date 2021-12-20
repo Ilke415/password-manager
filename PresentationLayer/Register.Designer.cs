@@ -534,7 +534,7 @@ namespace PresentationLayer {
             this.button_RegisterChoose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_RegisterChoose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_RegisterChoose.ForeColor = System.Drawing.Color.Black;
-            this.button_RegisterChoose.Location = new System.Drawing.Point(370, 36);
+            this.button_RegisterChoose.Location = new System.Drawing.Point(384, 40);
             this.button_RegisterChoose.Margin = new System.Windows.Forms.Padding(64, 0, 0, 0);
             this.button_RegisterChoose.Name = "button_RegisterChoose";
             this.button_RegisterChoose.Size = new System.Drawing.Size(92, 43);
@@ -551,7 +551,7 @@ namespace PresentationLayer {
             this.button_LogInChoose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_LogInChoose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_LogInChoose.ForeColor = System.Drawing.Color.White;
-            this.button_LogInChoose.Location = new System.Drawing.Point(462, 36);
+            this.button_LogInChoose.Location = new System.Drawing.Point(476, 40);
             this.button_LogInChoose.Margin = new System.Windows.Forms.Padding(0, 0, 64, 0);
             this.button_LogInChoose.Name = "button_LogInChoose";
             this.button_LogInChoose.Size = new System.Drawing.Size(92, 43);
