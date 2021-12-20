@@ -29,6 +29,18 @@ namespace BusinessLayer
         public bool IsValidEmailAddress(string emailAddress)
         {
 
+            if (EmailValidationWithNetMail(emailAddress))
+            {
+                if (!IsEmailAddressContainsOtherSpecialChars(emailAddress))
+                    return true;
+            }
+
+            return false;
+
+        } // End of  IsValidEmailAddress method
+
+        public bool EmailValidationWithNetMail(string emailAddress)
+        {
             try
             {
                 MailAddress m = new MailAddress(emailAddress);
@@ -40,7 +52,40 @@ namespace BusinessLayer
                 return false;
             }
 
-        } // End of  IsValidEmailAddress method
+        }
+
+
+        public bool IsEmailAddressContainsOtherSpecialChars(string emailAddress)
+        {
+            emailAddress = emailAddress.Trim();
+
+            emailAddress = RemoveValidSpecialCharactersFromString(emailAddress);
+
+            Regex filter = new Regex(@"[^0-9a-zA-Z]+");
+
+            if (filter.Match(emailAddress).Success)
+                return true;
+
+            return false;
+
+        }
+
+
+        private string RemoveValidSpecialCharactersFromString(string input)
+        {
+            string filteredString = "";
+            foreach (var item in input)
+            {
+                if (!IsContainingSpecialCharacters(item.ToString()))
+                    filteredString += item;
+            }
+
+
+
+            return filteredString;
+        }
+
+
 
 
         // Method for checking if password contains special characters
@@ -169,7 +214,7 @@ namespace BusinessLayer
 
         public int CalculatePasswordPoolSize(string password)
         {
-            password.Trim();
+            password = password.Trim();
 
             int passwordPoolSize = 0;
 
@@ -194,7 +239,7 @@ namespace BusinessLayer
         public int CalculatePasswordEntropy(string password)
         {
 
-            password.Trim();
+            password = password.Trim();
 
             // Calcuate password entropy
             // Formula E = L * log2(R)
@@ -236,7 +281,7 @@ namespace BusinessLayer
 
             int Score = 0;
 
-            password.Trim();
+            password = password.Trim();
 
             int entropy = CalculatePasswordEntropy(password);
 
@@ -255,7 +300,7 @@ namespace BusinessLayer
         public bool CommonPasswordChecker(string password)
         {
 
-            password.Trim();
+            password = password.Trim();
             Regex filter = new Regex("(password|pass)", RegexOptions.IgnoreCase);
 
             var match = filter.Match(password);
@@ -272,7 +317,7 @@ namespace BusinessLayer
         public List<string> ContainsNumbersInRange(string password)
         {
 
-            password.Trim();
+            password = password.Trim();
 
             Regex filter = new Regex(@"[0-9]{3,}");
 
@@ -340,7 +385,7 @@ namespace BusinessLayer
 
         public bool IsPasswordPredictable(string password)
         {
-            password.Trim();
+            password = password.Trim();
 
             Regex filterLowerCaseRange = new Regex(@"[a-z]{8,}");
             Regex filterUpperCaseRange = new Regex(@"[A-Z]{8,}");
@@ -372,7 +417,7 @@ namespace BusinessLayer
         public string CalculatePasswordStrength(string password)
         {
 
-            password.Trim();
+            password = password.Trim();
 
 
             string resultScore = "Weak";
@@ -402,7 +447,7 @@ namespace BusinessLayer
 
 
         //  =================================== END OF PASSWORD METHODS  ==============================
- 
+
         //  =================================== METHODS FOR WORKING WITH DATABASE  ============================
 
 
@@ -411,8 +456,8 @@ namespace BusinessLayer
         // Method for inserting new User in database
         public void InsertUser(string password, string emailAddress)
         {
-            password.Trim();
-            emailAddress.Trim();
+            password = password.Trim();
+            emailAddress = emailAddress.Trim();
 
             // Create AuthKey and salt 
             byte[] saltBytes = CryptoHelper.CreateHashSalt();
@@ -434,7 +479,7 @@ namespace BusinessLayer
             return userRepository.GetUserInformation(email);
         }
 
-      
+
 
 
         //  =================================== END OF METHODS FOR WORKING WITH DATABASE  =====================
