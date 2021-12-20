@@ -326,7 +326,7 @@ namespace PresentationLayer
 
                 List<Vault> vaults = vaultBusiness.GetUserVaults(user.UserID, VaultKey);
 
-                thread = new Thread(() => OpenNewForm(user.UserID, user.EmailAddress, VaultKey, vaults, vaultBusiness));
+                thread = new Thread(() => OpenNewForm(user.UserID, user.EmailAddress, VaultKey, vaults, vaultBusiness, iUserBusiness));
                 thread.Start();
                 this.Dispose();
 

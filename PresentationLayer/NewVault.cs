@@ -19,12 +19,12 @@ namespace PresentationLayer
         private readonly IVaultBusiness vaultBusiness;
         private int UserID;
         private string VaultKey;
-        private readonly IUserBusiness userBusiness;
+        
 
 
-        public NewVault(int UserID,string VaultKey,IVaultBusiness vaultBusiness, IUserBusiness userBusiness)
+        public NewVault(int UserID,string VaultKey,IVaultBusiness vaultBusiness)
         {
-            this.userBusiness = userBusiness;
+            
             this.UserID = UserID;
             this.VaultKey = VaultKey;  
             this.vaultBusiness = vaultBusiness;
@@ -42,7 +42,6 @@ namespace PresentationLayer
                 Label_cancel.Visible = true;
                 Label_cancel.Text = "Information missing";
             }
-                
             else
             {
                 VaultData vaultData = new VaultData(url, name, username, password);
@@ -50,10 +49,8 @@ namespace PresentationLayer
 
                 // thread = new Thread(() => OpenVaultForm(user.UserID, user.EmailAddress, VaultKey, vaults, vaultBusiness, iUserBusiness));
 
-                refreshVolts();
                 this.Dispose();
             }
-                
         }
         private void OpenVaultForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness, IUserBusiness userBusiness)
         {

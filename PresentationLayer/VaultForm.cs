@@ -35,17 +35,22 @@ namespace PresentationLayer
 
         private void VaultForm_Load(object sender, EventArgs e)
         {
-
-            refreshVolts();
-
+            refreshVolts(vaults);
         }
-        public static void refreshVolts()
+        public void clearLayout()
         {
+            int n = flowLayoutPanelMain.Controls.Count;
+            for (int i = 1; i < n; i++)
+                flowLayoutPanelMain.Controls.RemoveAt(i);
+        }
+        public  void refreshVolts(List<Vault> vaults)
+        {
+            
             labelUserEmailAddress.Text = EmailAddress;
-
+            clearLayout();
             foreach (Vault vault in vaults)
             {
-
+                
                 VaultData vaultData = vault.VaultDataDecrypted;
 
                 int vaultID = vault.VaultID;
@@ -142,7 +147,7 @@ namespace PresentationLayer
         }
         private void OpenEditForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness, IUserBusiness iUserBusiness)
         {
-            Application.Run(new Edit(UserID, EmailAddress,VaultKey,vaults, vaultBusiness, iUserBusiness));
+            Application.Run(new Edit(UserID, EmailAddress,VaultKey,vaults, vaultBusiness));
         }
 
         public int FindItemListIndex(List<Vault> vaults, int VaultID)
@@ -232,9 +237,16 @@ namespace PresentationLayer
 
         private void buttonAddNewVault_Click(object sender, EventArgs e)
         {
-            thread = new Thread(() => OpenNewVaultForm(UserID,   VaultKey, vaultBusiness));
-            thread.Start();
-            
+            //using (NewVault vault = new NewVault(UserID, VaultKey, vaultBusiness)) {
+            //    vault.ShowDialog();
+            //}
+            //vaults.Clear();
+            //vaults = vaultBusiness.GetUserVaults(UserID,VaultKey);
+            //refreshVolts(vaults);
+            clearLayout();
+
+
+
         }
         private void OpenNewVaultForm(int UserID, string VaultKey,  IVaultBusiness vaultBusiness)
         {
