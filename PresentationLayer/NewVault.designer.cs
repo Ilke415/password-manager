@@ -131,12 +131,12 @@ namespace PresentationLayer
             // 
             // button_Confirm
             // 
-            this.button_Confirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(85)))), ((int)(((byte)(148)))));
+            this.button_Confirm.BackColor = System.Drawing.Color.White;
             this.button_Confirm.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(85)))), ((int)(((byte)(148)))));
             this.button_Confirm.FlatAppearance.BorderSize = 2;
             this.button_Confirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button_Confirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_Confirm.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.button_Confirm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(85)))), ((int)(((byte)(148)))));
             this.button_Confirm.Location = new System.Drawing.Point(274, 290);
             this.button_Confirm.Name = "button_Confirm";
             this.button_Confirm.Size = new System.Drawing.Size(200, 46);
@@ -144,6 +144,8 @@ namespace PresentationLayer
             this.button_Confirm.Text = "CONFIRM";
             this.button_Confirm.UseVisualStyleBackColor = false;
             this.button_Confirm.Click += new System.EventHandler(this.button_Confirm_Click);
+            this.button_Confirm.MouseEnter += new System.EventHandler(this.button_Confirm_Enter);
+            this.button_Confirm.MouseLeave += new System.EventHandler(this.button_Confirm_Leave);
             // 
             // button_Cancel
             // 

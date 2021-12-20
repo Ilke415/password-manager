@@ -116,6 +116,8 @@ namespace PresentationLayer
                     //do something else
                 }
             }
+            if (textBox_URL_Edit.Text == "" || textBox_Name_Edit.Text == "" || textBox_Email_Edit.Text == "" || textBox_Password_Edit.Text == "")
+                this.Dispose();
         }
 
 
