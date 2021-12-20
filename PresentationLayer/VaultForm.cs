@@ -124,7 +124,17 @@ namespace PresentationLayer
 
         }
 
-
+        public VaultData GetVaultData(int VaultID)
+        {
+            VaultData vaultData = new VaultData();
+            foreach (var item in vaults)
+            {
+                if (item.VaultID == VaultID)
+                    vaultData = item.VaultDataDecrypted;
+            }
+            return vaultData;
+        }
+        
 
         public void labelEdit_Click(object sender, EventArgs e)
         {
@@ -135,19 +145,22 @@ namespace PresentationLayer
             string removedLabelName = labelName.Replace("labelEdit", "");
 
             int VaultID = Convert.ToInt32(removedLabelName);
+            VaultData vaultData = GetVaultData(UserID);
 
-           
-            
-                thread = new Thread(() => OpenEditForm(UserID, EmailAddress, VaultKey, vaults, vaultBusiness, iUserBusiness));
-                thread.Start();
-               
+            this.Enabled = false;
+            using (Edit vault = new Edit(UserID, VaultKey, vaultBusiness,vaultData, VaultID))
+            {
+                vault.ShowDialog();
+            }
+            clearLayout();
+            vaults.Clear();
+            vaults = vaultBusiness.GetUserVaults(UserID, VaultKey);
+            refreshVolts(vaults);
 
 
+            this.Enabled = true;
         }
-        private void OpenEditForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness, IUserBusiness iUserBusiness)
-        {
-            Application.Run(new Edit(UserID, EmailAddress,VaultKey,vaults, vaultBusiness));
-        }
+        
 
         public int FindItemListIndex(List<Vault> vaults, int VaultID)
         {
@@ -177,24 +190,22 @@ namespace PresentationLayer
 
             Control panelToDelete = flowLayoutPanelMain.Controls.Find($"panelVault{VaultID}", true)[0];
 
-            flowLayoutPanelMain.Controls.Remove(panelToDelete);
+            
 
-
-            int vaultIndex = FindItemListIndex(vaults, VaultID);
-
-            this.vaults.RemoveAt(vaultIndex);
-
-            string output = "";
-
-            foreach (var item in vaults)
+            DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this?", "Warning", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
             {
-                output += $"{item.VaultID}, ";
+                flowLayoutPanelMain.Controls.Remove(panelToDelete);
+                int vaultIndex = FindItemListIndex(vaults, VaultID);
+                this.vaults.RemoveAt(vaultIndex);
+                vaultBusiness.DeleteVault(this.UserID, VaultID);
             }
 
-            vaultBusiness.DeleteVault(this.UserID, VaultID);
 
-            MessageBox.Show(output);
-
+            else if (dialogResult == DialogResult.No)
+            {
+                //do something else
+            }
         }
 
         private void buttonAddNewVault_MouseHover(object sender, EventArgs e)
@@ -236,6 +247,8 @@ namespace PresentationLayer
 
         private void buttonAddNewVault_Click(object sender, EventArgs e)
         {
+            this.Enabled = false;
+
             using (NewVault vault = new NewVault(UserID, VaultKey, vaultBusiness))
             {
                 vault.ShowDialog();
@@ -245,7 +258,7 @@ namespace PresentationLayer
             vaults = vaultBusiness.GetUserVaults(UserID, VaultKey);
             refreshVolts(vaults);
 
-
+            this.Enabled = true;
         }
         private void OpenNewVaultForm(int UserID, string VaultKey,  IVaultBusiness vaultBusiness)
         {

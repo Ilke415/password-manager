@@ -47,6 +47,7 @@ namespace PresentationLayer
             this.buttonShowHideConfirmPassword = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // textBox_Password_New
@@ -248,6 +249,16 @@ namespace PresentationLayer
             this.panel1.Size = new System.Drawing.Size(270, 6);
             this.panel1.TabIndex = 79;
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Transparent;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.ForeColor = System.Drawing.Color.Transparent;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(508, 362);
+            this.panel2.TabIndex = 80;
+            // 
             // NewVault
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -272,6 +283,7 @@ namespace PresentationLayer
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.panel2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "NewVault";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -303,5 +315,6 @@ namespace PresentationLayer
         private System.Windows.Forms.Button buttonShowHideConfirmPassword;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panel2;
     }
 }

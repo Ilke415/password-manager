@@ -31,11 +31,11 @@ namespace PresentationLayer
         {
             this.panelHeader = new System.Windows.Forms.Panel();
             this.labelUserEmailAddress = new System.Windows.Forms.Label();
-            this.panelUserIcon = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.flowLayoutPanelMain = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonAddNewVault = new System.Windows.Forms.Button();
             this.panelFooter = new System.Windows.Forms.Panel();
+            this.panelUserIcon = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panelHeader.SuspendLayout();
             this.flowLayoutPanelMain.SuspendLayout();
             this.SuspendLayout();
@@ -65,37 +65,16 @@ namespace PresentationLayer
             this.labelUserEmailAddress.TabIndex = 2;
             this.labelUserEmailAddress.Text = "example@email.com";
             // 
-            // panelUserIcon
-            // 
-            this.panelUserIcon.BackgroundImage = global::PresentationLayer.Properties.Resources.UserLoginIcon;
-            this.panelUserIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelUserIcon.Location = new System.Drawing.Point(69, 3);
-            this.panelUserIcon.Name = "panelUserIcon";
-            this.panelUserIcon.Size = new System.Drawing.Size(60, 60);
-            this.panelUserIcon.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.BackgroundImage = global::PresentationLayer.Properties.Resources.logoutIcon;
-            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.panel1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panel1.Location = new System.Drawing.Point(905, 10);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(40, 40);
-            this.panel1.TabIndex = 0;
-            this.panel1.Click += new System.EventHandler(this.panel1_Click);
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
             // flowLayoutPanelMain
             // 
             this.flowLayoutPanelMain.AutoScroll = true;
             this.flowLayoutPanelMain.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanelMain.Controls.Add(this.buttonAddNewVault);
             this.flowLayoutPanelMain.Cursor = System.Windows.Forms.Cursors.Default;
-            this.flowLayoutPanelMain.Location = new System.Drawing.Point(43, 98);
+            this.flowLayoutPanelMain.Location = new System.Drawing.Point(47, 98);
             this.flowLayoutPanelMain.Name = "flowLayoutPanelMain";
             this.flowLayoutPanelMain.Padding = new System.Windows.Forms.Padding(35, 20, 20, 20);
-            this.flowLayoutPanelMain.Size = new System.Drawing.Size(896, 526);
+            this.flowLayoutPanelMain.Size = new System.Drawing.Size(883, 526);
             this.flowLayoutPanelMain.TabIndex = 3;
             this.flowLayoutPanelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanelMain_Paint);
             // 
@@ -119,12 +98,33 @@ namespace PresentationLayer
             // 
             // panelFooter
             // 
-            this.panelFooter.BackgroundImage = global::PresentationLayer.Properties.Resources.FooterBackgroundImage;
+            this.panelFooter.BackgroundImage = global::PresentationLayer.Properties.Resources.FooterBackgroundImageResized;
             this.panelFooter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelFooter.Location = new System.Drawing.Point(-8, 660);
+            this.panelFooter.Location = new System.Drawing.Point(-8, 654);
             this.panelFooter.Name = "panelFooter";
-            this.panelFooter.Size = new System.Drawing.Size(1000, 70);
+            this.panelFooter.Size = new System.Drawing.Size(1000, 105);
             this.panelFooter.TabIndex = 2;
+            // 
+            // panelUserIcon
+            // 
+            this.panelUserIcon.BackgroundImage = global::PresentationLayer.Properties.Resources.UserLoginIcon;
+            this.panelUserIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.panelUserIcon.Location = new System.Drawing.Point(69, 3);
+            this.panelUserIcon.Name = "panelUserIcon";
+            this.panelUserIcon.Size = new System.Drawing.Size(60, 60);
+            this.panelUserIcon.TabIndex = 1;
+            // 
+            // panel1
+            // 
+            this.panel1.BackgroundImage = global::PresentationLayer.Properties.Resources.logoutIcon;
+            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.panel1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.panel1.Location = new System.Drawing.Point(905, 10);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(40, 40);
+            this.panel1.TabIndex = 0;
+            this.panel1.Click += new System.EventHandler(this.panel1_Click);
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // VaultForm
             // 
@@ -132,7 +132,7 @@ namespace PresentationLayer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(984, 729);
+            this.ClientSize = new System.Drawing.Size(979, 755);
             this.Controls.Add(this.flowLayoutPanelMain);
             this.Controls.Add(this.panelFooter);
             this.Controls.Add(this.panelHeader);

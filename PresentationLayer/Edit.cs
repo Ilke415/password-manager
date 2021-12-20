@@ -15,21 +15,21 @@ namespace PresentationLayer
 {
     public partial class Edit : Form
     {
-        private Thread thread;
+        
         
         private readonly IVaultBusiness vaultBusiness;
         private int UserID;
-        private string EmailAddress;
+        private int vaultId;
         private string VaultKey;
-        private List<Vault> vaults;
+        
+        private VaultData vaultData;
 
-        public Edit(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness)
+        public Edit(int UserID, string VaultKey, IVaultBusiness vaultBusiness,VaultData vaultData,int vaultId)
         {
-            
             this.UserID = UserID;
-            this.EmailAddress = EmailAddress;
+            this.vaultData = vaultData;
             this.VaultKey = VaultKey;
-            this.vaults = vaults;
+            this.vaultId = vaultId;
             this.vaultBusiness = vaultBusiness;
             InitializeComponent();
         }
@@ -44,9 +44,16 @@ namespace PresentationLayer
             button_Confirm.BackColor = Color.White;
             button_Confirm.ForeColor = Color.Black;
         }
+
+        
         private void Edit_Load(object sender, EventArgs e)
         {
+            
 
+            textBox_URL_Edit.Text = vaultData.URL;
+            textBox_Name_Edit.Text = vaultData.Name;
+            textBox_Email_Edit.Text = vaultData.Username;
+            textBox_Password_Edit.Text = vaultData.Password;
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
@@ -81,10 +88,11 @@ namespace PresentationLayer
             {
 
                 VaultData vaultData = new VaultData(url, name, username, password);
-              
 
 
-                
+                UpdateVault(UserID,vaultId,VaultKey,vaultData);
+
+
                 this.Dispose();
             }
         }
@@ -102,7 +110,7 @@ namespace PresentationLayer
         {
             if (textBox_URL_Edit.Text != "" || textBox_Name_Edit.Text != "" || textBox_Email_Edit.Text != "" || textBox_Password_Edit.Text != "")
             {
-                DialogResult dialogResult = MessageBox.Show("ou have got unfinished work! Are you sure you want to quit?", "Warning", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show("You have got unsaved changes! Are you sure you want to quit?", "Warning", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
 
@@ -144,6 +152,11 @@ namespace PresentationLayer
             {
                 textBox.UseSystemPasswordChar = !textBox.UseSystemPasswordChar;
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

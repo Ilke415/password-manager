@@ -45,6 +45,7 @@ namespace PresentationLayer
             this.label9 = new System.Windows.Forms.Label();
             this.Label_cancel_edit = new System.Windows.Forms.Label();
             this.buttonShowHideConfirmPassword = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // label2
@@ -231,6 +232,17 @@ namespace PresentationLayer
             this.buttonShowHideConfirmPassword.UseVisualStyleBackColor = false;
             this.buttonShowHideConfirmPassword.Click += new System.EventHandler(this.buttonShowHideConfirmPassword_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Transparent;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.ForeColor = System.Drawing.SystemColors.ControlLight;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(508, 312);
+            this.panel1.TabIndex = 64;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
             // Edit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -253,10 +265,11 @@ namespace PresentationLayer
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Edit";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Edit";
             this.Load += new System.EventHandler(this.Edit_Load);
             this.ResumeLayout(false);
@@ -281,5 +294,6 @@ namespace PresentationLayer
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label Label_cancel_edit;
         private System.Windows.Forms.Button buttonShowHideConfirmPassword;
+        private System.Windows.Forms.Panel panel1;
     }
 }
