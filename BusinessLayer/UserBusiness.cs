@@ -101,6 +101,8 @@ namespace BusinessLayer
 
             return false;
         }
+
+
         // End of method  IsEmailAddressExist(string emailAddress)
 
         public bool LoginValidation(string emailAddress, string password)
@@ -431,6 +433,8 @@ namespace BusinessLayer
         {
             return userRepository.GetUserInformation(email);
         }
+
+      
 
 
         //  =================================== END OF METHODS FOR WORKING WITH DATABASE  =====================
