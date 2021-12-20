@@ -33,7 +33,17 @@ namespace PresentationLayer
             this.vaultBusiness = vaultBusiness;
             InitializeComponent();
         }
+        private void button_Confirm_Enter(object sender, EventArgs e)
+        {
+            button_Confirm.BackColor = Color.FromArgb(35, 85, 148);
+            button_Confirm.ForeColor = Color.White;
+        }
 
+        private void button_Confirm_Leave(object sender, EventArgs e)
+        {
+            button_Confirm.BackColor = Color.White;
+            button_Confirm.ForeColor = Color.Black;
+        }
         private void Edit_Load(object sender, EventArgs e)
         {
 

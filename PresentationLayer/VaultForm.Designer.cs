@@ -112,6 +112,7 @@ namespace PresentationLayer
             this.buttonAddNewVault.Size = new System.Drawing.Size(250, 150);
             this.buttonAddNewVault.TabIndex = 0;
             this.buttonAddNewVault.UseVisualStyleBackColor = true;
+            this.buttonAddNewVault.Click += new System.EventHandler(this.buttonAddNewVault_Click);
             this.buttonAddNewVault.MouseEnter += new System.EventHandler(this.buttonAddNewVault_MouseHover);
             this.buttonAddNewVault.MouseLeave += new System.EventHandler(this.buttonAddNewVault_MouseLeave);
             // 

@@ -128,7 +128,17 @@ namespace PresentationLayer
 
             int VaultID = Convert.ToInt32(removedLabelName);
 
-            MessageBox.Show($"{VaultID}");
+           
+            
+                thread = new Thread(() => OpenEditForm(UserID, EmailAddress, VaultKey, vaults, vaultBusiness, iUserBusiness));
+                thread.Start();
+               
+
+
+        }
+        private void OpenEditForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness, IUserBusiness iUserBusiness)
+        {
+            Application.Run(new Edit(UserID, EmailAddress,VaultKey,vaults, vaultBusiness, iUserBusiness));
         }
 
         public int FindItemListIndex(List<Vault> vaults, int VaultID)
@@ -213,6 +223,17 @@ namespace PresentationLayer
         private void OpenRegistrationForm(IUserBusiness iUserBusiness, IVaultBusiness vaultBusiness)
         {
             Application.Run(new Form1(iUserBusiness, vaultBusiness));
+        }
+
+        private void buttonAddNewVault_Click(object sender, EventArgs e)
+        {
+            thread = new Thread(() => OpenNewVaultForm(UserID,   VaultKey, vaultBusiness));
+            thread.Start();
+            
+        }
+        private void OpenNewVaultForm(int UserID, string VaultKey,  IVaultBusiness vaultBusiness)
+        {
+            Application.Run(new NewVault(UserID,  VaultKey,  vaultBusiness));
         }
     }
 }

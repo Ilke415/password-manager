@@ -120,6 +120,8 @@ namespace PresentationLayer
             this.button_Confirm.Text = "CONFIRM";
             this.button_Confirm.UseVisualStyleBackColor = true;
             this.button_Confirm.Click += new System.EventHandler(this.button_Confirm_Click);
+            this.button_Confirm.MouseEnter += new System.EventHandler(this.button_Confirm_Enter);
+            this.button_Confirm.MouseLeave += new System.EventHandler(this.button_Confirm_Leave);
             // 
             // label7
             // 
