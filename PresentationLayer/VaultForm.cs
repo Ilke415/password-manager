@@ -39,15 +39,14 @@ namespace PresentationLayer
         }
         public void clearLayout()
         {
-            int n = flowLayoutPanelMain.Controls.Count;
-            for (int i = 1; i < n; i++)
-                flowLayoutPanelMain.Controls.RemoveAt(i);
+            while (flowLayoutPanelMain.Controls.Count > 1) 
+                flowLayoutPanelMain.Controls.RemoveAt(1);
         }
         public  void refreshVolts(List<Vault> vaults)
         {
             
             labelUserEmailAddress.Text = EmailAddress;
-            clearLayout();
+            
             foreach (Vault vault in vaults)
             {
                 
@@ -237,14 +236,14 @@ namespace PresentationLayer
 
         private void buttonAddNewVault_Click(object sender, EventArgs e)
         {
-            //using (NewVault vault = new NewVault(UserID, VaultKey, vaultBusiness)) {
-            //    vault.ShowDialog();
-            //}
-            //vaults.Clear();
-            //vaults = vaultBusiness.GetUserVaults(UserID,VaultKey);
-            //refreshVolts(vaults);
+            using (NewVault vault = new NewVault(UserID, VaultKey, vaultBusiness))
+            {
+                vault.ShowDialog();
+            }
             clearLayout();
-
+            vaults.Clear();
+            vaults = vaultBusiness.GetUserVaults(UserID, VaultKey);
+            refreshVolts(vaults);
 
 
         }
