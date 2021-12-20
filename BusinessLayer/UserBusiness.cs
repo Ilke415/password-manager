@@ -247,7 +247,7 @@ namespace BusinessLayer
             // L = password length
             // R = size of the pool
 
-            int R = 0;
+            int R;
 
             int L = password.Length;
 
