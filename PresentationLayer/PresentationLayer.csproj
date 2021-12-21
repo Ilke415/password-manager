@@ -178,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="obj\Debug\PresentationLayer.csproj.FileListAbsolute.txt" />
+    <None Include="Resources\PasswordManagerIcon.png" />
     <None Include="Resources\FooterBackgroundImageResized.png" />
     <None Include="Resources\UserLoginIcon.png" />
     <None Include="Resources\logoutIcon.png" />

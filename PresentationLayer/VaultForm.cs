@@ -145,7 +145,7 @@ namespace PresentationLayer
             string removedLabelName = labelName.Replace("labelEdit", "");
 
             int VaultID = Convert.ToInt32(removedLabelName);
-            VaultData vaultData = GetVaultData(UserID);
+            VaultData vaultData = GetVaultData(VaultID);
 
             this.Enabled = false;
             using (Edit vault = new Edit(UserID, VaultKey, vaultBusiness,vaultData, VaultID))
