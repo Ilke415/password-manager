@@ -510,7 +510,7 @@ namespace PresentationLayer {
             // 
             // button_RegisterChoose
             // 
-            this.button_RegisterChoose.BackColor = System.Drawing.SystemColors.Control;
+            this.button_RegisterChoose.BackColor = System.Drawing.Color.White;
             this.button_RegisterChoose.DialogResult = System.Windows.Forms.DialogResult.No;
             this.button_RegisterChoose.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(85)))), ((int)(((byte)(148)))));
             this.button_RegisterChoose.FlatAppearance.BorderSize = 2;

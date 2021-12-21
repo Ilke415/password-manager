@@ -90,7 +90,7 @@ namespace DataLayer
                 using (SqlCommand sqlCommand = new SqlCommand())
                 {
                     sqlCommand.Connection = sqlConnection;
-                    sqlCommand.CommandText = "UPDATE VAULTS SET VaultData = @encryptedVaultData WHERE UserID = @userID AND VaultID = @vaultID)";
+                    sqlCommand.CommandText = "UPDATE VAULTS SET VaultData = @encryptedVaultData WHERE UserID = @userID AND VaultID = @vaultID";
                     sqlCommand.Parameters.AddWithValue("@encryptedVaultData", encryptedVaultData);
                     sqlCommand.Parameters.AddWithValue("@userID", userID);
                     sqlCommand.Parameters.AddWithValue("@vaultID", vaultID);                   
