@@ -1,7 +1,7 @@
 ﻿
 namespace PresentationLayer
 {
-    partial class VaultForm
+    partial class VaultsForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@ namespace PresentationLayer
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VaultForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VaultsForm));
             this.panelHeader = new System.Windows.Forms.Panel();
             this.labelUserEmailAddress = new System.Windows.Forms.Label();
             this.panelUserIcon = new System.Windows.Forms.Panel();
@@ -48,9 +48,9 @@ namespace PresentationLayer
             this.panelHeader.Controls.Add(this.panelUserIcon);
             this.panelHeader.Controls.Add(this.panel1);
             this.panelHeader.Cursor = System.Windows.Forms.Cursors.Default;
-            this.panelHeader.Location = new System.Drawing.Point(-8, 0);
+            this.panelHeader.Location = new System.Drawing.Point(0, 0);
             this.panelHeader.Name = "panelHeader";
-            this.panelHeader.Size = new System.Drawing.Size(996, 70);
+            this.panelHeader.Size = new System.Drawing.Size(997, 70);
             this.panelHeader.TabIndex = 0;
             this.panelHeader.Paint += new System.Windows.Forms.PaintEventHandler(this.panelHeader_Paint);
             // 
@@ -59,7 +59,7 @@ namespace PresentationLayer
             this.labelUserEmailAddress.AutoSize = true;
             this.labelUserEmailAddress.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUserEmailAddress.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(85)))), ((int)(((byte)(148)))));
-            this.labelUserEmailAddress.Location = new System.Drawing.Point(155, 18);
+            this.labelUserEmailAddress.Location = new System.Drawing.Point(123, 18);
             this.labelUserEmailAddress.Name = "labelUserEmailAddress";
             this.labelUserEmailAddress.Size = new System.Drawing.Size(194, 25);
             this.labelUserEmailAddress.TabIndex = 2;
@@ -69,7 +69,7 @@ namespace PresentationLayer
             // 
             this.panelUserIcon.BackgroundImage = global::PresentationLayer.Properties.Resources.UserLoginIcon;
             this.panelUserIcon.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelUserIcon.Location = new System.Drawing.Point(93, 3);
+            this.panelUserIcon.Location = new System.Drawing.Point(61, 3);
             this.panelUserIcon.Name = "panelUserIcon";
             this.panelUserIcon.Size = new System.Drawing.Size(60, 60);
             this.panelUserIcon.TabIndex = 1;
@@ -79,7 +79,7 @@ namespace PresentationLayer
             this.panel1.BackgroundImage = global::PresentationLayer.Properties.Resources.logoutIcon;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.panel1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.panel1.Location = new System.Drawing.Point(868, 10);
+            this.panel1.Location = new System.Drawing.Point(877, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(40, 40);
             this.panel1.TabIndex = 0;
@@ -92,10 +92,10 @@ namespace PresentationLayer
             this.flowLayoutPanelMain.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanelMain.Controls.Add(this.buttonAddNewVault);
             this.flowLayoutPanelMain.Cursor = System.Windows.Forms.Cursors.Default;
-            this.flowLayoutPanelMain.Location = new System.Drawing.Point(52, 97);
+            this.flowLayoutPanelMain.Location = new System.Drawing.Point(61, 95);
             this.flowLayoutPanelMain.Name = "flowLayoutPanelMain";
             this.flowLayoutPanelMain.Padding = new System.Windows.Forms.Padding(35, 20, 20, 20);
-            this.flowLayoutPanelMain.Size = new System.Drawing.Size(883, 543);
+            this.flowLayoutPanelMain.Size = new System.Drawing.Size(870, 543);
             this.flowLayoutPanelMain.TabIndex = 3;
             this.flowLayoutPanelMain.Paint += new System.Windows.Forms.PaintEventHandler(this.flowLayoutPanelMain_Paint);
             // 
@@ -119,14 +119,14 @@ namespace PresentationLayer
             // 
             // panelFooter
             // 
-            this.panelFooter.BackgroundImage = global::PresentationLayer.Properties.Resources.FooterBackgroundImageResized;
+            this.panelFooter.BackgroundImage = global::PresentationLayer.Properties.Resources.FooterBackground;
             this.panelFooter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelFooter.Location = new System.Drawing.Point(1, 666);
+            this.panelFooter.Location = new System.Drawing.Point(4, 666);
             this.panelFooter.Name = "panelFooter";
-            this.panelFooter.Size = new System.Drawing.Size(987, 90);
+            this.panelFooter.Size = new System.Drawing.Size(993, 90);
             this.panelFooter.TabIndex = 2;
             // 
-            // VaultForm
+            // VaultsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -138,10 +138,10 @@ namespace PresentationLayer
             this.Controls.Add(this.panelHeader);
             this.Cursor = System.Windows.Forms.Cursors.Default;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "VaultForm";
+            this.Name = "VaultsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Password manager";
             this.Load += new System.EventHandler(this.VaultForm_Load);

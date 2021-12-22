@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace PresentationLayer
 {
-    public partial class VaultForm : Form
+    public partial class VaultsForm : Form
     {
         private Thread thread;
         private int UserID;
@@ -22,7 +22,7 @@ namespace PresentationLayer
         private List<Vault> vaults;
         private readonly IVaultBusiness vaultBusiness;
         private readonly IUserBusiness iUserBusiness;
-        public VaultForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness, IUserBusiness iUserBusiness)
+        public VaultsForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness, IUserBusiness iUserBusiness)
         {
             this.iUserBusiness = iUserBusiness;
             this.UserID = UserID;
@@ -63,20 +63,17 @@ namespace PresentationLayer
                 panel.Name = $"panelVault{vault.VaultID}";
 
                 Label labelName = new Label();
-
-                labelName.Text = vaultData.Name;
-
-                labelName.Font = new Font("Elephant", 30.75F);
+                string Name = vaultData.Name.Length <= 8 ? vaultData.Name : vaultData.Name.Substring(0, 8) + "...";
+                labelName.Text = Name;
+                labelName.Font = new Font("Segoe UI", 30.75F);
                 labelName.AutoSize = true;
                 labelName.Top = 10;
                 panel.Controls.Add(labelName);
 
 
                 Label labelUsername = new Label();
-
-
-                labelUsername.Text = vaultData.Username;
-
+                string username = vaultData.Username.Length <= 25 ? vaultData.Username : vaultData.Username.Substring(0, 23) + "...";
+                labelUsername.Text = username;
                 labelUsername.Font = new Font("Segoe UI", 12.75F);
                 labelUsername.AutoSize = true;
                 labelUsername.Margin = new Padding(30, 10, 10, 10);
@@ -84,8 +81,8 @@ namespace PresentationLayer
                 labelUsername.Left = 10;
                 panel.Controls.Add(labelUsername);
 
-                Label labelEdit = new Label();
 
+                Label labelEdit = new Label();
                 labelEdit.Text = "Edit";
                 labelEdit.Font = new Font("Segoe UI", 12.75F);
                 labelEdit.AutoSize = true;
@@ -148,7 +145,7 @@ namespace PresentationLayer
             VaultData vaultData = GetVaultData(VaultID);
 
             this.Enabled = false;
-            using (Edit vault = new Edit(UserID, VaultKey, vaultBusiness,vaultData, VaultID))
+            using (EditVaultForm vault = new EditVaultForm(UserID, VaultKey, vaultBusiness,vaultData, VaultID))
             {
                 vault.ShowDialog();
             }
@@ -247,22 +244,29 @@ namespace PresentationLayer
 
         private void buttonAddNewVault_Click(object sender, EventArgs e)
         {
-            this.Enabled = false;
 
-            using (NewVault vault = new NewVault(UserID, VaultKey, vaultBusiness))
+            if (vaults.Count < 50)
             {
-                vault.ShowDialog();
-            }
-            clearLayout();
-            vaults.Clear();
-            vaults = vaultBusiness.GetUserVaults(UserID, VaultKey);
-            refreshVolts(vaults);
+                this.Enabled = false;
 
-            this.Enabled = true;
+                using (AddVaultForm vault = new AddVaultForm(UserID, VaultKey, vaultBusiness))
+                {
+                    vault.ShowDialog();
+                }
+                clearLayout();
+                vaults.Clear();
+                vaults = vaultBusiness.GetUserVaults(UserID, VaultKey);
+                refreshVolts(vaults);
+
+                this.Enabled = true;
+            }
+            else {
+                MessageBox.Show("Maximum number of vaults is 50.");
+            }
         }
         private void OpenNewVaultForm(int UserID, string VaultKey,  IVaultBusiness vaultBusiness)
         {
-            Application.Run(new NewVault(UserID,  VaultKey,  vaultBusiness));
+            Application.Run(new AddVaultForm(UserID,  VaultKey,  vaultBusiness));
         }
 
         private void panelHeader_Paint(object sender, PaintEventArgs e)

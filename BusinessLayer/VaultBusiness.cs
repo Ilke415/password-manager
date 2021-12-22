@@ -100,5 +100,41 @@ namespace BusinessLayer
         {
             return Convert.ToBase64String(CryptoHelper.CreateVaultKey(emailAddress, password, salt));
         }
+
+
+
+        // Method for creating random password
+        public string CreateRandomPassword(int length)
+        {// Characters allowed in password
+            string upperCase = "ABCDEFGHJKLMNOPQRSTUVWXYZ";
+            string lowerCase = "abcdefghijklmnopqrstuvwxyz";
+
+            string numbers = "0123456789";
+
+            string specialCharacters = "!@#$%^&*?_-";
+            Random random = new Random();
+
+
+            string all = $"{upperCase}{lowerCase}{numbers}{specialCharacters}";
+
+            char[] chars = new char[length];
+
+            // Ensure password has at least one uppercase, number and special character
+            chars[random.Next(0, length)] = upperCase[random.Next(0, upperCase.Length)];
+            chars[random.Next(0, length)] = numbers[random.Next(0, numbers.Length)];
+            chars[random.Next(0, length)] = specialCharacters[random.Next(0, specialCharacters.Length)];
+
+
+
+            for (int i = 0; i < length; i++)
+            {
+                if (chars[i] == '\0')
+                    chars[i] = all[random.Next(0, all.Length)];
+            }
+
+
+            return new string(chars);
+        }
+        // End of method CreateRandomPassword(int length)
     }
 }

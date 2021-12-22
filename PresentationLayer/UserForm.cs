@@ -18,9 +18,6 @@ namespace PresentationLayer
         private readonly IUserBusiness iUserBusiness;
         private readonly IVaultBusiness vaultBusiness;
         private Thread thread;
-        private bool isPasswordChanged = false;
-        private bool isConfirmPasswordChanged = false;
-        private bool isLoginPasswordChanged = false;
         public Form1(IUserBusiness iUserBusiness, IVaultBusiness vaultBusiness)
         {
 
@@ -51,110 +48,7 @@ namespace PresentationLayer
             }
 
         }
-     
-        private void textBox_Email_Enter(object sender, EventArgs e)
-        {
-            HideValidationLabels();
-            if (textBox_Email.Text == "Email")
-                textBox_Email.Text = "";
-            textBox_Email.ForeColor = Color.Black;
-        }
 
-        private void textBox_Email_Leave(object sender, EventArgs e)
-        {
-            if (textBox_Email.Text == "")
-            {
-                textBox_Email.Text = "Email";
-                textBox_Email.ForeColor = Color.Gray;
-            }
-
-        }
-
-        private void textBox_Password_Enter(object sender, EventArgs e)
-        {
-            HideValidationLabels();
-            if (textBox_Password.Text == "Password")
-                textBox_Password.Text = "";
-            textBox_Password.ForeColor = Color.Black;
-
-        }
-        private void textBox_Password_Leave(object sender, EventArgs e)
-        {
-            if (textBox_Password.Text == "")
-            {
-                textBox_Password.Text = "Password";
-                textBox_Password.ForeColor = Color.Gray;
-                textBox_Password.PasswordChar = '\0';
-            }
-        }
-        private void textBox_ConfirmPassword_Enter(object sender, EventArgs e)
-        {
-            HideValidationLabels();
-            if (textBox_ConfirmPassword.Text == "Confirm Password")
-                textBox_ConfirmPassword.Text = "";
-            textBox_ConfirmPassword.ForeColor = Color.Black;
-
-        }
-        private void textBox_ConfirmPassword_Leave(object sender, EventArgs e)
-        {
-            if (textBox_ConfirmPassword.Text == "")
-            {
-                textBox_ConfirmPassword.Text = "Confirm Password";
-                textBox_ConfirmPassword.ForeColor = Color.Gray;
-                textBox_ConfirmPassword.PasswordChar = '\0';
-            }
-        }
-
-        private void textBox_EmailLogin_Enter(object sender, EventArgs e)
-        {
-          
-            HideValidationLabels();
-
-  
-            if (textBox_EmailLogin.Text == "Email")
-                textBox_EmailLogin.Text = "";
-            textBox_EmailLogin.ForeColor = Color.Black;
-        }
-
-        private void textBox_EmailLogin_Leave(object sender, EventArgs e)
-        {
-            if (textBox_EmailLogin.Text == "")
-            {
-                textBox_EmailLogin.Text = "Email";
-                textBox_EmailLogin.ForeColor = Color.Gray;
-            }
-        }
-
-        private void textBox_PasswordLogin_Enter(object sender, EventArgs e)
-        {
-
-            if (isLoginPasswordChanged == false)
-            {
-                textBox_PasswordLogin.UseSystemPasswordChar = true;
-                textBox_PasswordLogin.Text = "";
-                textBox_PasswordLogin.ForeColor = Color.Black;
-                isLoginPasswordChanged = true;
-                return;
-            }
-
-            if (textBox_PasswordLogin.Text == "Password")
-                textBox_PasswordLogin.Text = "";
-            textBox_PasswordLogin.ForeColor = Color.Black;
-
-        }
-
-        private void textBox_PasswordLogin_Leave(object sender, EventArgs e)
-        {
-            if (textBox_PasswordLogin.Text == "")
-            {
-                textBox_PasswordLogin.Text = "Password";
-                textBox_PasswordLogin.ForeColor = Color.Gray;
-                textBox_PasswordLogin.UseSystemPasswordChar = false;
-                buttonShowHidePasswordLogin.BackgroundImage = global::PresentationLayer.Properties.Resources.show;
-            }
-        }
-
-     
         private void button_SignUp_Enter(object sender, EventArgs e)
         {
             button_SignUp.BackColor = Color.FromArgb(35, 85, 148);
@@ -204,7 +98,7 @@ namespace PresentationLayer
             panel_Registration.BringToFront();
         }
 
-     
+
 
         private void ResetPasswordMeter(List<Panel> panels)
         {
@@ -242,12 +136,13 @@ namespace PresentationLayer
 
         private void textBox_Password_TextChanged(object sender, EventArgs e)
         {
+            HideValidationLabels();
             string pass = textBox_Password.Text;
             List<Button> buttons = new List<Button>() { buttonLength, buttonNumbers, buttonLowercase, buttonUppercase };
             List<Panel> panels = new List<Panel>() { panel_1, panel_3, panel_4 };
             List<bool> requirements = IsValidPassword(pass);
             string strength = "";
-            if (textBox_Password.Text != "Password")
+            if (textBox_Password.Text != "")
             {
                 strength = CalculatePasswordStrength(pass);
             }
@@ -273,28 +168,75 @@ namespace PresentationLayer
         {
             string emailAddress = textBox_Email.Text;
 
-            if (!IsValidEmailAddress(emailAddress))
-                label_Email.Visible = true;
-            if (textBox_Password.Text != textBox_ConfirmPassword.Text)
+            string password = textBox_Password.Text;
+
+            string confirmPassword = textBox_ConfirmPassword.Text;
+
+           
+            if (password != confirmPassword)
                 label_ConfirmPassword.Visible = true;
-            if (textBox_Password.Text == "Password")
+            if (CalculatePasswordStrength(textBox_Password.Text) == "Weak")
                 label_Password.Visible = true;
             if (IsEmailAddressExist(textBox_Email.Text))
             {
                 label_EmailExist.Visible = true;
-
             }
+            if (emailAddress.Length == 0)
+            {
+                label_Email.Text = "Please enter your email address.";
+                label_Email.Visible = true;
+                return;
+            }
+            else
+            {
+                if (!IsValidEmailAddress(emailAddress))
+                {
+                    label_Email.Text = "Please enter a valid email address.";
+                    label_Email.Visible = true;
+                    return;
+                }
+            }
+
+
             if (IsValidEmailAddress(emailAddress) && textBox_Password.Text == textBox_ConfirmPassword.Text && textBox_Password.Text != "Password" && !IsEmailAddressExist(textBox_Email.Text) && CalculatePasswordStrength(textBox_Password.Text) != "Weak")
             {
-                label_EmailExist.Visible = false;
+                DialogResult dialogResult = MessageBox.Show("Did you saved or remembered your master password?", "Warning", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
 
-                string email = textBox_Email.Text.Trim();
-                string password = textBox_Password.Text;
+                    label_EmailExist.Visible = false;
 
-                iUserBusiness.InsertUser(password, email);
+                    string email = textBox_Email.Text.Trim();
+                    string passwordText = textBox_Password.Text;
 
-                string message = "Succesfull registration";
-                MessageBox.Show(message);
+                    iUserBusiness.InsertUser(passwordText, email);
+
+                    textBox_EmailLogin.Text = "";
+                    textBox_Email.Text = "";
+                    textBox_Password.Text = "";
+                    textBox_ConfirmPassword.Text = "";
+                    textBox_PasswordLogin.Text = "";
+
+                    string message = "Succesfull registration. Now you can login to your account!";
+
+                    List<Button> buttons = new List<Button>() { buttonLength, buttonNumbers, buttonLowercase, buttonUppercase };
+                    List<Panel> panels = new List<Panel>() { panel_1, panel_3, panel_4 };
+
+                    ResetPasswordMeter(panels);
+                    ResetRequirementsIcons(buttons);
+
+                    MessageBox.Show(message);
+
+                    panel_LogIn.Visible = true;
+                    panel_LogIn.BringToFront();
+
+                    button_LogInChoose.BackColor = Color.FromArgb(35, 85, 148);
+                    button_LogInChoose.ForeColor = Color.White;
+                    button_RegisterChoose.BackColor = Color.White;
+                    button_RegisterChoose.ForeColor = Color.FromArgb(35, 85, 148);
+                    panel_Registration.Visible = false;
+
+                }
             }
         }
 
@@ -305,10 +247,6 @@ namespace PresentationLayer
         public List<Boolean> IsValidPassword(string password)
         {
             return iUserBusiness.ValidationOfPasswordRequirements(password);
-        }
-        public string CreateRandomPassword(int length)
-        {
-            return iUserBusiness.CreateRandomPassword(length);
         }
         public Boolean IsEmailAddressExist(string emailAddress)
         {
@@ -346,13 +284,13 @@ namespace PresentationLayer
         }
         private void OpenNewForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness, IUserBusiness userBusiness)
         {
-            Application.Run(new VaultForm(UserID, EmailAddress, VaultKey, vaults, vaultBusiness, userBusiness));
+            Application.Run(new VaultsForm(UserID, EmailAddress, VaultKey, vaults, vaultBusiness, userBusiness));
         }
 
 
         private void buttonShowHideConfirmPassword_Click(object sender, EventArgs e)
         {
-            TogglePasswordTextVisibility(new List<Button> { buttonShowHidePassword, buttonShowHideConfirmPassword }, new List<TextBox> { textBox_Password, textBox_ConfirmPassword});
+            TogglePasswordTextVisibility(new List<Button> { buttonShowHidePassword, buttonShowHideConfirmPassword }, new List<TextBox> { textBox_Password, textBox_ConfirmPassword });
 
         }
         private void buttonShowHidePassword_Click(object sender, EventArgs e)
@@ -362,36 +300,23 @@ namespace PresentationLayer
         }
         private void buttonShowHidePasswordLogin_Click(object sender, EventArgs e)
         {
-            TogglePasswordTextVisibility(new List<Button> { buttonShowHidePasswordLogin }, new List<TextBox> {textBox_PasswordLogin });
+            TogglePasswordTextVisibility(new List<Button> { buttonShowHidePasswordLogin }, new List<TextBox> { textBox_PasswordLogin });
         }
 
         private void TogglePasswordTextVisibility(List<Button> buttons, List<TextBox> textBoxes)
         {
             foreach (var button in buttons)
             {
-                if (!textBoxes[0].UseSystemPasswordChar)
+                if (textBoxes[0].UseSystemPasswordChar)
                 {
-                    button.BackgroundImage = global::PresentationLayer.Properties.Resources.show;
+                    button.BackgroundImage = global::PresentationLayer.Properties.Resources.hide;
 
-                    foreach (var item in textBoxes)
-                    {
-                        if ((item.Name == "textBox_Password" || (item.Name == "textBox_PasswordLogin") && item.Text == ""))
-                            item.Text = "Password";
-                        else if (item.Name == "textBox_ConfirmPassword" && item.Text == "")
-                            item.Text = "Confirm Password";
-                    }
-               
+                   
                 }
                 else
                 {
-                    button.BackgroundImage = global::PresentationLayer.Properties.Resources.hide;
-                    foreach (var item in textBoxes)
-                    {
-                        if ((item.Name == "textBox_Password" || (item.Name == "textBox_PasswordLogin") && item.Text == ""))
-                            item.Text = "Password";
-                        else if (item.Name == "textBox_ConfirmPassword" && item.Text == "")
-                            item.Text = "Confirm Password";
-                    }
+                    button.BackgroundImage = global::PresentationLayer.Properties.Resources.show;
+                   
                 }
             }
 
@@ -434,19 +359,30 @@ namespace PresentationLayer
             return iUserBusiness.LoginValidation(emailAddress, password);
         }
 
-
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         public string CalculatePasswordStrength(string password)
         {
             return iUserBusiness.CalculatePasswordStrength(password);
         }
 
+        private void textBox_Email_TextChanged(object sender, EventArgs e)
+        {
+            HideValidationLabels();
+        }
 
+        private void textBox_ConfirmPassword_TextChanged(object sender, EventArgs e)
+        {
+            HideValidationLabels();
+        }
+
+        private void textBox_EmailLogin_TextChanged(object sender, EventArgs e)
+        {
+            HideValidationLabels();
+        }
+
+        private void textBox_PasswordLogin_TextChanged(object sender, EventArgs e)
+        {
+            HideValidationLabels();
+        }
     }
 
 }

@@ -13,20 +13,17 @@ using System.Windows.Forms;
 
 namespace PresentationLayer
 {
-    public partial class NewVault : Form
+    public partial class AddVaultForm : Form
     {
         private Thread thread;
         private readonly IVaultBusiness vaultBusiness;
         private int UserID;
         private string VaultKey;
-        
 
-
-        public NewVault(int UserID,string VaultKey,IVaultBusiness vaultBusiness)
+        public AddVaultForm(int UserID, string VaultKey, IVaultBusiness vaultBusiness)
         {
-            
             this.UserID = UserID;
-            this.VaultKey = VaultKey;  
+            this.VaultKey = VaultKey;
             this.vaultBusiness = vaultBusiness;
             InitializeComponent();
         }
@@ -37,55 +34,33 @@ namespace PresentationLayer
             String name = textBox_Name_New.Text;
             String username = textBox_Email_New.Text;
             String password = textBox_Password_New.Text;
-            if (textBox_URL_New.Text == "" || textBox_Name_New.Text == "" || textBox_Email_New.Text == "" || textBox_Password_New.Text == "")
+            if (url == "" && name == "" && username == "" && password == "")
             {
                 Label_cancel.Visible = true;
-                Label_cancel.Text = "Information missing";
             }
             else
             {
                 VaultData vaultData = new VaultData(url, name, username, password);
                 InsertVault(UserID, VaultKey, vaultData);
-
-                // thread = new Thread(() => OpenVaultForm(user.UserID, user.EmailAddress, VaultKey, vaults, vaultBusiness, iUserBusiness));
-
                 this.Dispose();
             }
         }
-        private void OpenVaultForm(int UserID, string EmailAddress, string VaultKey, List<Vault> vaults, IVaultBusiness vaultBusiness, IUserBusiness userBusiness)
-        {
-            Application.Run(new VaultForm(UserID, EmailAddress, VaultKey, vaults, vaultBusiness, userBusiness));
-        }
 
-        private void button_Confirm_Enter(object sender, EventArgs e)
-        {
-            button_Confirm.BackColor = Color.FromArgb(35, 85, 148);
-            button_Confirm.ForeColor = Color.White;
-        }
 
-        private void button_Confirm_Leave(object sender, EventArgs e)
-        {
-            button_Confirm.BackColor = Color.White;
-            button_Confirm.ForeColor = Color.Black;
-        }
-        private void NewVault_Load(object sender, EventArgs e)
-        {
 
-        }
         public void InsertVault(int userID, string vaultKey, VaultData vaultData)
         {
             vaultBusiness.InsertVault(userID, vaultKey, vaultData);
-
         }
 
         private void button_Cancel_Click(object sender, EventArgs e)
         {
             if (textBox_URL_New.Text != "" || textBox_Name_New.Text != "" || textBox_Email_New.Text != "" || textBox_Password_New.Text != "")
             {
-                DialogResult dialogResult = MessageBox.Show("You have got unfinished work! Are you sure you want to quit?", "Warning", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show("You have unsaved work! Are you sure you want to quit?", "Warning", MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.Yes)
                 {
-                    
+
                     this.Dispose();
                 }
 
@@ -102,28 +77,33 @@ namespace PresentationLayer
         }
         private void buttonShowHideConfirmPassword_Click(object sender, EventArgs e)
         {
-            TogglePasswordTextVisibility(new List<Button> { buttonShowHideConfirmPassword }, new List<TextBox> { textBox_Password_New });
+            TogglePasswordTextVisibility(buttonShowHideConfirmPassword ,textBox_Password_New);
 
         }
-        private void TogglePasswordTextVisibility(List<Button> buttons, List<TextBox> textBoxes)
+        private void TogglePasswordTextVisibility(Button button, TextBox textBox)
         {
-            foreach (var button in buttons)
+            if (textBox.UseSystemPasswordChar)
             {
-                if (textBoxes[0].UseSystemPasswordChar)
-                {
-                    button.BackgroundImage = global::PresentationLayer.Properties.Resources.show;
+                button.BackgroundImage = global::PresentationLayer.Properties.Resources.hide;
 
-                }
-                else
-                {
-                    button.BackgroundImage = global::PresentationLayer.Properties.Resources.hide;
-
-                }
             }
-            foreach (var textBox in textBoxes)
+            else
             {
-                textBox.UseSystemPasswordChar = !textBox.UseSystemPasswordChar;
+                button.BackgroundImage = global::PresentationLayer.Properties.Resources.show;
+
             }
+
+
+            textBox.UseSystemPasswordChar = !textBox.UseSystemPasswordChar;
+
         }
+
+        private void labelGeneratePassword_Click(object sender, EventArgs e)
+        {
+            string randomPassword = vaultBusiness.CreateRandomPassword(15);
+            textBox_Password_New.Text = randomPassword;
+        }
+
+    
     }
 }

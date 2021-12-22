@@ -14,5 +14,6 @@ namespace Shared.Interfaces
         void DeleteVault(int userID, int vaultID);
         void UpdateVault(int userID, int vaultID, string vaultKey, VaultData vaultData);
         string CreateVaultKey(string emailAddress, string password, string salt);
+        string CreateRandomPassword(int length);
     }
 }

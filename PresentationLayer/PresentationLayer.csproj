@@ -81,43 +81,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Edit.cs">
+    <Compile Include="EditVaultForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Edit.designer.cs">
-      <DependentUpon>Edit.cs</DependentUpon>
+    <Compile Include="EditVaultForm.designer.cs">
+      <DependentUpon>EditVaultForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewVault.cs">
+    <Compile Include="AddVaultForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewVault.designer.cs">
-      <DependentUpon>NewVault.cs</DependentUpon>
+    <Compile Include="AddVaultForm.designer.cs">
+      <DependentUpon>AddVaultForm.cs</DependentUpon>
     </Compile>
     <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
-    <Compile Include="Register.cs">
+    <Compile Include="UserForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Register.Designer.cs">
-      <DependentUpon>Register.cs</DependentUpon>
+    <Compile Include="UserForm.Designer.cs">
+      <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VaultForm.cs">
+    <Compile Include="VaultsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="VaultForm.Designer.cs">
-      <DependentUpon>VaultForm.cs</DependentUpon>
+    <Compile Include="VaultsForm.Designer.cs">
+      <DependentUpon>VaultsForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Edit.resx">
-      <DependentUpon>Edit.cs</DependentUpon>
+    <EmbeddedResource Include="EditVaultForm.resx">
+      <DependentUpon>EditVaultForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewVault.resx">
-      <DependentUpon>NewVault.cs</DependentUpon>
+    <EmbeddedResource Include="AddVaultForm.resx">
+      <DependentUpon>AddVaultForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="obj\Debug\PresentationLayer.Form1.resources" />
     <EmbeddedResource Include="obj\Debug\PresentationLayer.Properties.Resources.resources" />
-    <EmbeddedResource Include="Register.resx">
-      <DependentUpon>Register.cs</DependentUpon>
+    <EmbeddedResource Include="UserForm.resx">
+      <DependentUpon>UserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -129,8 +129,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="VaultForm.resx">
-      <DependentUpon>VaultForm.cs</DependentUpon>
+    <EmbeddedResource Include="VaultsForm.resx">
+      <DependentUpon>VaultsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\Debug\PresentationLayer.csproj.AssemblyReference.cache" />
@@ -178,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="obj\Debug\PresentationLayer.csproj.FileListAbsolute.txt" />
+    <None Include="Resources\FooterBackground.jpg" />
     <None Include="Resources\PasswordManagerIcon.png" />
     <None Include="Resources\FooterBackgroundImageResized.png" />
     <None Include="Resources\UserLoginIcon.png" />
