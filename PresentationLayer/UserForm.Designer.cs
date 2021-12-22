@@ -78,6 +78,7 @@ namespace PresentationLayer {
             // 
             // button_SignUp
             // 
+            this.button_SignUp.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_SignUp.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(85)))), ((int)(((byte)(148)))));
             this.button_SignUp.FlatAppearance.BorderSize = 2;
             this.button_SignUp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -518,6 +519,7 @@ namespace PresentationLayer {
             // 
             // button_LogIn
             // 
+            this.button_LogIn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_LogIn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(85)))), ((int)(((byte)(148)))));
             this.button_LogIn.FlatAppearance.BorderSize = 2;
             this.button_LogIn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -564,6 +566,7 @@ namespace PresentationLayer {
             // button_RegisterChoose
             // 
             this.button_RegisterChoose.BackColor = System.Drawing.Color.White;
+            this.button_RegisterChoose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_RegisterChoose.DialogResult = System.Windows.Forms.DialogResult.No;
             this.button_RegisterChoose.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(85)))), ((int)(((byte)(148)))));
             this.button_RegisterChoose.FlatAppearance.BorderSize = 2;
@@ -582,6 +585,7 @@ namespace PresentationLayer {
             // button_LogInChoose
             // 
             this.button_LogInChoose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(85)))), ((int)(((byte)(148)))));
+            this.button_LogInChoose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_LogInChoose.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(85)))), ((int)(((byte)(148)))));
             this.button_LogInChoose.FlatAppearance.BorderSize = 2;
             this.button_LogInChoose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
