@@ -149,10 +149,13 @@ namespace PresentationLayer
             {
                 vault.ShowDialog();
             }
+
             clearLayout();
             vaults.Clear();
             vaults = vaultBusiness.GetUserVaults(UserID, VaultKey);
             refreshVolts(vaults);
+            string nameToSearch = textBox_Search.Text;
+            SearchByName(nameToSearch);
 
 
             this.Enabled = true;
@@ -196,6 +199,8 @@ namespace PresentationLayer
                 int vaultIndex = FindItemListIndex(vaults, VaultID);
                 this.vaults.RemoveAt(vaultIndex);
                 vaultBusiness.DeleteVault(this.UserID, VaultID);
+                string nameToSearch = textBox_Search.Text;
+                SearchByName(nameToSearch);
             }
 
 
@@ -264,13 +269,49 @@ namespace PresentationLayer
                 MessageBox.Show("Maximum number of vaults is 50.");
             }
         }
-        private void OpenNewVaultForm(int UserID, string VaultKey,  IVaultBusiness vaultBusiness)
-        {
-            Application.Run(new AddVaultForm(UserID,  VaultKey,  vaultBusiness));
-        }
 
-        private void panelHeader_Paint(object sender, PaintEventArgs e)
+        public void SearchByName(string nameToSearch)
         {
+            bool check;
+            if (nameToSearch.Length != 0)
+            {
+                check = true;
+               
+                buttonAddNewVault.Hide();
+                foreach (var item in vaults)
+                {
+                    Control panelToHide = flowLayoutPanelMain.Controls.Find($"panelVault{item.VaultID}", true)[0];
+                    if (!item.VaultDataDecrypted.Name.StartsWith(nameToSearch, StringComparison.OrdinalIgnoreCase))
+                        panelToHide.Hide();
+                    else {
+
+                        panelToHide.Show();
+                    }
+
+                }
+
+
+            }
+            else
+            {
+                buttonAddNewVault.Show();
+                textBox_Search.Text = "";
+                foreach (var item in vaults)
+                {
+                    Control panelToHide = flowLayoutPanelMain.Controls.Find($"panelVault{item.VaultID}", true)[0];
+                    panelToHide.Show();
+
+                }
+            }
+        }
+      
+        private void textBox_Search_TextChanged(object sender, EventArgs e)
+        {
+            string nameToSearch = textBox_Search.Text;
+
+            SearchByName(textBox_Search.Text);
+
+
 
         }
     }

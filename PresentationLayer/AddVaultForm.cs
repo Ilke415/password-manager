@@ -15,7 +15,6 @@ namespace PresentationLayer
 {
     public partial class AddVaultForm : Form
     {
-        private Thread thread;
         private readonly IVaultBusiness vaultBusiness;
         private int UserID;
         private string VaultKey;
