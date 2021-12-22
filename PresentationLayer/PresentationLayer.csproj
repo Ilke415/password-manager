@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -65,6 +65,11 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Threading.Thread, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Thread.4.3.0\lib\net46\System.Threading.Thread.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -76,19 +81,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
-    <Compile Include="Register.cs">
+    <Compile Include="EditVaultForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Register.Designer.cs">
-      <DependentUpon>Register.cs</DependentUpon>
+    <Compile Include="EditVaultForm.designer.cs">
+      <DependentUpon>EditVaultForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddVaultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddVaultForm.designer.cs">
+      <DependentUpon>AddVaultForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="obj\Debug\.NETFramework,Version=v4.8.AssemblyAttributes.cs" />
+    <Compile Include="UserForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserForm.Designer.cs">
+      <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VaultsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VaultsForm.Designer.cs">
+      <DependentUpon>VaultsForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="EditVaultForm.resx">
+      <DependentUpon>EditVaultForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddVaultForm.resx">
+      <DependentUpon>AddVaultForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="obj\Debug\PresentationLayer.Form1.resources" />
     <EmbeddedResource Include="obj\Debug\PresentationLayer.Properties.Resources.resources" />
-    <EmbeddedResource Include="Register.resx">
-      <DependentUpon>Register.cs</DependentUpon>
+    <EmbeddedResource Include="UserForm.resx">
+      <DependentUpon>UserForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -98,7 +127,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="VaultsForm.resx">
+      <DependentUpon>VaultsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\Debug\PresentationLayer.csproj.AssemblyReference.cache" />
     <None Include="obj\Debug\PresentationLayer.csproj.CoreCompileInputs.cache" />
@@ -145,6 +178,19 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="obj\Debug\PresentationLayer.csproj.FileListAbsolute.txt" />
+    <None Include="Resources\FooterBackground.jpg" />
+    <None Include="Resources\PasswordManagerIcon.png" />
+    <None Include="Resources\FooterBackgroundImageResized.png" />
+    <None Include="Resources\UserLoginIcon.png" />
+    <None Include="Resources\logoutIcon.png" />
+    <None Include="Resources\FooterBackgroundImage.PNG" />
+    <None Include="Resources\AddNewIconHover.png" />
+    <None Include="Resources\AddNewIcon.png" />
+    <None Include="Resources\blank.PNG" />
+    <None Include="Resources\warning.PNG" />
+    <None Include="Resources\success.PNG" />
+    <None Include="Resources\hide.png" />
+    <None Include="Resources\show.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />
