@@ -272,11 +272,8 @@ namespace PresentationLayer
 
         public void SearchByName(string nameToSearch)
         {
-            bool check;
             if (nameToSearch.Length != 0)
             {
-                check = true;
-               
                 buttonAddNewVault.Hide();
                 foreach (var item in vaults)
                 {
