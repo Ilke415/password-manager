@@ -38,14 +38,41 @@ namespace VaultRepositoryTest
             bool result;
             try
             {
-              
-
+                vaultRepository.InsertVault(user.UserID, dataToInsert);
+                result = true;
             }
             catch {
-            
-            
+
+                result = false;
             }
 
+            Assert.IsTrue(result);
+
+        }
+
+        [TestMethod]
+        public void IsVaultUpdated()
+        {
+            Vault vault = vaultRepository.GetUserVaults(user.UserID)[0];
+            bool result;
+            try
+            {
+                vaultRepository.UpdateVault(user.UserID, vault.VaultID, dataToUpdate);
+                result = true;
+            }
+            catch
+            {
+
+                result = false;
+            }
+
+            Assert.IsTrue(result);
+
+        }
+        [TestMethod]
+        public void GetAllUserVaultsTest()
+        {
+            Assert.IsNotNull(vaultRepository.GetUserVaults(user.UserID));
         }
     }
 }

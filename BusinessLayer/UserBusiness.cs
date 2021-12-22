@@ -21,7 +21,7 @@ namespace BusinessLayer
             this.userRepository = _userRepository;
         }
 
-
+        public UserBusiness() { }
         //  =================================== METHODS FOR VALIDATION  ===================================
 
 
