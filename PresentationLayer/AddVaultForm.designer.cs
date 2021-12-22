@@ -66,6 +66,7 @@ namespace PresentationLayer
             this.textBox_Password_New.Size = new System.Drawing.Size(154, 18);
             this.textBox_Password_New.TabIndex = 75;
             this.textBox_Password_New.UseSystemPasswordChar = true;
+            this.textBox_Password_New.TextChanged += new System.EventHandler(this.textBox_Password_New_TextChanged);
             // 
             // label9
             // 
@@ -87,6 +88,7 @@ namespace PresentationLayer
             this.textBox_Name_New.Name = "textBox_Name_New";
             this.textBox_Name_New.Size = new System.Drawing.Size(175, 18);
             this.textBox_Name_New.TabIndex = 73;
+            this.textBox_Name_New.TextChanged += new System.EventHandler(this.textBox_Name_New_TextChanged);
             // 
             // label8
             // 
@@ -108,6 +110,7 @@ namespace PresentationLayer
             this.textBox_Email_New.Name = "textBox_Email_New";
             this.textBox_Email_New.Size = new System.Drawing.Size(175, 18);
             this.textBox_Email_New.TabIndex = 71;
+            this.textBox_Email_New.TextChanged += new System.EventHandler(this.textBox_Email_New_TextChanged);
             // 
             // label6
             // 
@@ -129,6 +132,7 @@ namespace PresentationLayer
             this.textBox_URL_New.Name = "textBox_URL_New";
             this.textBox_URL_New.Size = new System.Drawing.Size(175, 18);
             this.textBox_URL_New.TabIndex = 69;
+            this.textBox_URL_New.TextChanged += new System.EventHandler(this.textBox_URL_New_TextChanged);
             // 
             // label7
             // 

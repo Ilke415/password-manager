@@ -104,6 +104,24 @@ namespace PresentationLayer
             textBox_Password_New.Text = randomPassword;
         }
 
-    
+        private void textBox_URL_New_TextChanged(object sender, EventArgs e)
+        {
+            Label_cancel.Hide();
+        }
+
+        private void textBox_Name_New_TextChanged(object sender, EventArgs e)
+        {
+            Label_cancel.Hide();
+        }
+
+        private void textBox_Email_New_TextChanged(object sender, EventArgs e)
+        {
+            Label_cancel.Hide();
+        }
+
+        private void textBox_Password_New_TextChanged(object sender, EventArgs e)
+        {
+            Label_cancel.Hide();
+        }
     }
 }

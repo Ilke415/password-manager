@@ -63,7 +63,7 @@ namespace PresentationLayer
                 panel.Name = $"panelVault{vault.VaultID}";
 
                 Label labelName = new Label();
-                string Name = vaultData.Name.Length <= 8 ? vaultData.Name : vaultData.Name.Substring(0, 8) + "...";
+                string Name = vaultData.Name.Length <= 9 ? vaultData.Name : vaultData.Name.Substring(0, 9) + "...";
                 labelName.Text = Name;
                 labelName.Font = new Font("Segoe UI", 30.75F);
                 labelName.AutoSize = true;
