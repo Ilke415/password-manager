@@ -33,7 +33,6 @@ namespace PresentationLayer
             this.textBox_Email_Edit = new System.Windows.Forms.TextBox();
             this.textBox_Password_Edit = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.buttonShowHideConfirmPassword = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelGeneratePassword = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -49,6 +48,8 @@ namespace PresentationLayer
             this.label8 = new System.Windows.Forms.Label();
             this.button_Cancel = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.buttonShowHideConfirmPassword = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -84,27 +85,11 @@ namespace PresentationLayer
             this.label9.Size = new System.Drawing.Size(200, 30);
             this.label9.TabIndex = 60;
             // 
-            // buttonShowHideConfirmPassword
-            // 
-            this.buttonShowHideConfirmPassword.BackColor = System.Drawing.Color.White;
-            this.buttonShowHideConfirmPassword.BackgroundImage = global::PresentationLayer.Properties.Resources.show;
-            this.buttonShowHideConfirmPassword.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.buttonShowHideConfirmPassword.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonShowHideConfirmPassword.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.buttonShowHideConfirmPassword.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.buttonShowHideConfirmPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonShowHideConfirmPassword.ForeColor = System.Drawing.Color.White;
-            this.buttonShowHideConfirmPassword.Location = new System.Drawing.Point(429, 216);
-            this.buttonShowHideConfirmPassword.Name = "buttonShowHideConfirmPassword";
-            this.buttonShowHideConfirmPassword.Size = new System.Drawing.Size(34, 23);
-            this.buttonShowHideConfirmPassword.TabIndex = 63;
-            this.buttonShowHideConfirmPassword.UseVisualStyleBackColor = false;
-            this.buttonShowHideConfirmPassword.Click += new System.EventHandler(this.buttonShowHideConfirmPassword_Click);
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.button1);
             this.panel1.Controls.Add(this.labelGeneratePassword);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.buttonShowHideConfirmPassword);
@@ -126,7 +111,7 @@ namespace PresentationLayer
             this.panel1.ForeColor = System.Drawing.SystemColors.ControlLight;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(500, 360);
+            this.panel1.Size = new System.Drawing.Size(520, 360);
             this.panel1.TabIndex = 64;
             // 
             // labelGeneratePassword
@@ -287,12 +272,44 @@ namespace PresentationLayer
             this.label7.Size = new System.Drawing.Size(200, 30);
             this.label7.TabIndex = 51;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.BackgroundImage = global::PresentationLayer.Properties.Resources.copy_icon;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.Color.Transparent;
+            this.button1.Location = new System.Drawing.Point(468, 211);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(32, 32);
+            this.button1.TabIndex = 82;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // buttonShowHideConfirmPassword
+            // 
+            this.buttonShowHideConfirmPassword.BackColor = System.Drawing.Color.White;
+            this.buttonShowHideConfirmPassword.BackgroundImage = global::PresentationLayer.Properties.Resources.show;
+            this.buttonShowHideConfirmPassword.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.buttonShowHideConfirmPassword.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonShowHideConfirmPassword.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.buttonShowHideConfirmPassword.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.buttonShowHideConfirmPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonShowHideConfirmPassword.ForeColor = System.Drawing.Color.White;
+            this.buttonShowHideConfirmPassword.Location = new System.Drawing.Point(429, 216);
+            this.buttonShowHideConfirmPassword.Name = "buttonShowHideConfirmPassword";
+            this.buttonShowHideConfirmPassword.Size = new System.Drawing.Size(34, 23);
+            this.buttonShowHideConfirmPassword.TabIndex = 63;
+            this.buttonShowHideConfirmPassword.UseVisualStyleBackColor = false;
+            this.buttonShowHideConfirmPassword.Click += new System.EventHandler(this.buttonShowHideConfirmPassword_Click);
+            // 
             // EditVaultForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(500, 360);
+            this.ClientSize = new System.Drawing.Size(520, 360);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -327,5 +344,6 @@ namespace PresentationLayer
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label labelGeneratePassword;
+        private System.Windows.Forms.Button button1;
     }
 }
