@@ -125,5 +125,14 @@ namespace PresentationLayer
             string randomPassword = vaultBusiness.CreateRandomPassword(15);
             textBox_Password_Edit.Text = randomPassword;
         }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string copyToClipboard = textBox_Password_Edit.Text;
+            Thread thread = new Thread(() => Clipboard.SetText(copyToClipboard));
+            thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
+            thread.Start();
+            thread.Join();
+            MessageBox.Show("Copied to clipboard");
+        }
     }
 }
