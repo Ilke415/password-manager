@@ -2,4 +2,5 @@
 
 ### Description
 
-Application for storing passwords as encrypted data in database which user can access after login to his account and cam add, edit or delete them.
+Application for storing passwords as encrypted data in database which user can access after login to his account and can add, edit or delete them.
+
